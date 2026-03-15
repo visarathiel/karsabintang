@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Self-Introduction Rites — Karsa Bintang</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Cinzel:wght@400;500;600&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --void: #050810;
+    --navy: #080E1E;
+    --navy-mid: #0D1428;
+    --navy-light: #141E38;
+    --gold: #C9A96E;
+    --gold-bright: #E0C08A;
+    --gold-dim: #7A6040;
+    --gold-glow: rgba(201, 169, 110, 0.15);
+    --silver: #A8B4C8;
+    --cream: #EDE8DE;
+    --mist: rgba(237, 232, 222, 0.55);
+    --border: rgba(201, 169, 110, 0.18);
+    --border-mid: rgba(201, 169, 110, 0.35);
+    --border-bright: rgba(201, 169, 110, 0.6);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--void);
+    min-height: 100vh;
+    font-family: 'Cormorant', serif;
+    color: var(--cream);
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  /* Atmospheric background */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 0%, rgba(20, 30, 70, 0.8) 0%, transparent 70%),
+      radial-gradient(ellipse 60% 40% at 20% 80%, rgba(201, 169, 110, 0.04) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 60% at 80% 30%, rgba(100, 120, 200, 0.05) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Grain texture overlay */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    opacity: 0.4;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .page {
+    position: relative;
+    z-index: 1;
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 60px 24px 80px;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    text-align: center;
+    margin-bottom: 56px;
+    animation: ascend 1.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    opacity: 0;
+  }
+
+  @keyframes ascend {
+    from { opacity: 0; transform: translateY(32px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .brand-mark {
+    display: inline-block;
+    margin-bottom: 28px;
+  }
+
+  .brand-mark img {
+    width: 140px;
+    height: auto;
+    opacity: 0.9;
+  }
+
+  .brand-name {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 0.45em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    opacity: 0.75;
+  }
+
+  .rite-title {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(30px, 7vw, 44px);
+    font-weight: 500;
+    line-height: 1.12;
+    color: var(--cream);
+    margin-bottom: 16px;
+    letter-spacing: 0.08em;
+  }
+
+  .rite-title em {
+    font-style: normal;
+    color: var(--gold-bright);
+    font-weight: 400;
+  }
+
+  .rite-subtitle {
+    font-family: 'Cormorant', serif;
+    font-style: italic;
+    font-size: 17px;
+    color: var(--mist);
+    line-height: 1.6;
+    max-width: 420px;
+    margin: 0 auto;
+    font-weight: 300;
+  }
+
+  /* ── DIVIDER ── */
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 40px 0;
+    animation: ascend 1.6s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+    opacity: 0;
+  }
+
+  .divider-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold-dim), transparent);
+  }
+
+  .divider-glyph {
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    color: var(--gold);
+    letter-spacing: 0.3em;
+    opacity: 0.6;
+  }
+
+  /* ── INVOCATION ── */
+  .invocation {
+    text-align: center;
+    margin-bottom: 48px;
+    animation: ascend 1.6s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
+    opacity: 0;
+  }
+
+  .invocation p {
+    font-family: 'IM Fell English', serif;
+    font-style: italic;
+    font-size: 16px;
+    color: var(--mist);
+    line-height: 1.9;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  /* ── RITES ── */
+  .rites {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    margin-bottom: 48px;
+  }
+
+  .rite {
+    position: relative;
+    border: 1px solid var(--border);
+    padding: 28px 28px 24px;
+    cursor: default;
+    transition: all 0.4s ease;
+    overflow: hidden;
+    animation: ascend 1.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    opacity: 0;
+  }
+
+  .rite:nth-child(1) { animation-delay: 0.4s; }
+  .rite:nth-child(2) { animation-delay: 0.55s; }
+  .rite:nth-child(3) { animation-delay: 0.7s; }
+
+  .rite::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 0%, var(--gold-glow), transparent 70%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+
+  .rite:hover {
+    border-color: var(--border-mid);
+  }
+
+  .rite:hover::before { opacity: 1; }
+
+  .rite.featured {
+    border-color: var(--border-mid);
+    background: linear-gradient(160deg, rgba(20, 30, 60, 0.6) 0%, rgba(10, 15, 35, 0.4) 100%);
+  }
+
+  .rite.featured::after {
+    content: 'MOST SOUGHT';
+    position: absolute;
+    top: 0;
+    right: 28px;
+    font-family: 'Cinzel', serif;
+    font-size: 7px;
+    letter-spacing: 0.28em;
+    color: var(--navy);
+    background: var(--gold);
+    padding: 3px 10px;
+  }
+
+  .rite-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 14px;
+    gap: 16px;
+  }
+
+  .rite-name {
+    font-family: 'Cinzel', serif;
+    font-size: 24px;
+    color: var(--cream);
+    font-weight: 400;
+    letter-spacing: 0.02em;
+  }
+
+  .rite-price {
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  .price-usd {
+    font-family: 'Cinzel', serif;
+    font-size: 20px;
+    color: var(--gold-bright);
+    letter-spacing: 0.04em;
+    display: block;
+    line-height: 1;
+  }
+
+  .price-idr {
+    font-family: 'Cormorant', serif;
+    font-size: 12px;
+    color: var(--gold-dim);
+    letter-spacing: 0.06em;
+    display: block;
+    margin-top: 4px;
+    opacity: 0.8;
+  }
+
+  .rite-spread {
+    font-family: 'Cinzel', serif;
+    font-size: 8px;
+    letter-spacing: 0.28em;
+    color: var(--gold);
+    text-transform: uppercase;
+    opacity: 0.65;
+    margin-bottom: 10px;
+  }
+
+  .rite-description {
+    font-family: 'Cormorant', serif;
+    font-style: italic;
+    font-size: 15px;
+    color: var(--mist);
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  /* ── SEPARATOR ── */
+  .separator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin: 48px 0;
+    animation: ascend 1.6s cubic-bezier(0.16, 1, 0.3, 1) 0.85s forwards;
+    opacity: 0;
+  }
+
+  .separator-line {
+    width: 80px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold-dim));
+  }
+
+  .separator-line.right {
+    background: linear-gradient(90deg, var(--gold-dim), transparent);
+  }
+
+  .separator-symbol {
+    font-family: 'IM Fell English', serif;
+    font-size: 11px;
+    color: var(--gold);
+    letter-spacing: 0.25em;
+    opacity: 0.5;
+  }
+
+  /* ── HIGH TICKET ── */
+  .high-ticket {
+    border: 1px solid var(--border-mid);
+    padding: 36px 32px;
+    position: relative;
+    text-align: center;
+    background: linear-gradient(160deg, rgba(20, 30, 60, 0.5) 0%, rgba(8, 14, 30, 0.8) 100%);
+    animation: ascend 1.6s cubic-bezier(0.16, 1, 0.3, 1) 0.95s forwards;
+    opacity: 0;
+    overflow: hidden;
+  }
+
+  .high-ticket::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(201, 169, 110, 0.08), transparent);
+    pointer-events: none;
+  }
+
+  .high-ticket-eyebrow {
+    font-family: 'Cinzel', serif;
+    font-size: 8px;
+    letter-spacing: 0.4em;
+    color: var(--gold);
+    text-transform: uppercase;
+    opacity: 0.7;
+    margin-bottom: 16px;
+  }
+
+  .high-ticket-name {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(26px, 5vw, 34px);
+    color: var(--cream);
+    margin-bottom: 6px;
+  }
+
+  .high-ticket-tagline {
+    font-family: 'Cormorant', serif;
+    font-style: italic;
+    font-size: 15px;
+    color: var(--mist);
+    margin-bottom: 24px;
+    opacity: 0.8;
+  }
+
+  .high-ticket-systems {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 24px;
+  }
+
+  .system-tag {
+    font-family: 'Cinzel', serif;
+    font-size: 8px;
+    letter-spacing: 0.2em;
+    color: var(--silver);
+    border: 1px solid var(--border);
+    padding: 5px 12px;
+    opacity: 0.7;
+  }
+
+  .high-ticket-price {
+    margin-bottom: 8px;
+  }
+
+  .ht-usd {
+    font-family: 'Cinzel', serif;
+    font-size: 32px;
+    color: var(--gold-bright);
+    letter-spacing: 0.05em;
+    display: block;
+    line-height: 1;
+  }
+
+  .ht-idr {
+    font-family: 'Cormorant', serif;
+    font-size: 14px;
+    color: var(--gold-dim);
+    letter-spacing: 0.08em;
+    display: block;
+    margin-top: 6px;
+    opacity: 0.75;
+  }
+
+  .high-ticket-includes {
+    list-style: none;
+    margin: 20px 0 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .high-ticket-includes li {
+    font-family: 'Cormorant', serif;
+    font-size: 14px;
+    color: var(--mist);
+    letter-spacing: 0.05em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    opacity: 0.85;
+  }
+
+  .high-ticket-includes li::before {
+    content: '✦';
+    color: var(--gold-dim);
+    font-size: 8px;
+    opacity: 0.6;
+  }
+
+  /* ── HIGH TICKET DESCRIPTION ── */
+  .ht-description {
+    font-family: 'Cormorant', serif;
+    font-style: italic;
+    font-size: 15.5px;
+    color: var(--mist);
+    line-height: 1.85;
+    max-width: 520px;
+    margin: 0 auto 28px;
+    font-weight: 300;
+    text-align: center;
+  }
+
+  .thresholds {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin: 28px 0 32px;
+    text-align: left;
+  }
+
+  .threshold {
+    padding: 16px 20px;
+    border: 1px solid var(--border);
+    position: relative;
+    transition: border-color 0.3s ease, background 0.3s ease;
+  }
+
+  .threshold:hover {
+    border-color: var(--border-mid);
+    background: rgba(201, 169, 110, 0.03);
+  }
+
+  .threshold-number {
+    font-family: 'Cinzel', serif;
+    font-size: 7.5px;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    opacity: 0.55;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+  }
+
+  .threshold-name {
+    font-family: 'IM Fell English', serif;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--cream);
+    margin-bottom: 5px;
+  }
+
+  .threshold-desc {
+    font-family: 'Cormorant', serif;
+    font-size: 13.5px;
+    color: var(--mist);
+    line-height: 1.6;
+    opacity: 0.75;
+    font-weight: 300;
+  }
+
+  @media (max-width: 480px) {
+    .threshold { padding: 14px 16px; }
+    .ht-description { font-size: 14.5px; }
+  }
+
+  /* ── CTA ── */
+  .cta-wrap {
+    text-align: center;
+    margin-top: 48px;
+    animation: ascend 1.6s cubic-bezier(0.16, 1, 0.3, 1) 1.1s forwards;
+    opacity: 0;
+  }
+
+  .cta-note {
+    font-family: 'IM Fell English', serif;
+    font-style: italic;
+    font-size: 15px;
+    color: var(--mist);
+    margin-bottom: 24px;
+    opacity: 0.7;
+    line-height: 1.7;
+  }
+
+  .cta-btn {
+    display: inline-block;
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 0.38em;
+    color: var(--gold);
+    border: 1px solid var(--border-bright);
+    padding: 15px 36px;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: all 0.35s ease;
+    background: transparent;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--gold-glow);
+    opacity: 0;
+    transition: opacity 0.35s ease;
+  }
+
+  .cta-btn:hover {
+    color: var(--gold-bright);
+    border-color: var(--gold);
+  }
+
+  .cta-btn:hover::before { opacity: 1; }
+
+  /* ── FOOTER ── */
+  .footer {
+    text-align: center;
+    margin-top: 52px;
+    animation: ascend 1.6s cubic-bezier(0.16, 1, 0.3, 1) 1.2s forwards;
+    opacity: 0;
+  }
+
+  .footer-note {
+    font-family: 'Cormorant', serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--mist);
+    opacity: 0.5;
+    line-height: 1.8;
+    margin-bottom: 16px;
+  }
+
+  .footer-brand {
+    font-family: 'Cinzel', serif;
+    font-size: 8px;
+    letter-spacing: 0.3em;
+    color: var(--gold-dim);
+    opacity: 0.5;
+    text-transform: uppercase;
+  }
+
+  /* ── BACK NAV ── */
+  .back-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 32px;
+    background: linear-gradient(180deg, rgba(5,8,16,0.95) 0%, rgba(5,8,16,0.0) 100%);
+    backdrop-filter: blur(2px);
+    pointer-events: none;
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Cinzel', serif;
+    font-size: 8px;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    text-decoration: none;
+    text-transform: uppercase;
+    opacity: 0.7;
+    transition: opacity 0.3s, color 0.3s;
+    pointer-events: all;
+  }
+  .back-link:hover { opacity: 1; color: var(--gold-bright); }
+  .back-link svg { transition: transform 0.3s; }
+  .back-link:hover svg { transform: translateX(-3px); }
+
+  .back-nav-brand {
+    font-family: 'Cinzel', serif;
+    font-size: 8px;
+    letter-spacing: 0.3em;
+    color: var(--gold-dim);
+    text-transform: uppercase;
+    opacity: 0.45;
+    pointer-events: none;
+  }
+
+  /* offset page top so content doesn't hide behind fixed nav */
+  .page { padding-top: 80px; }
+
+  /* ── MOBILE ── */
+  @media (max-width: 480px) {
+    .page { padding: 80px 16px 60px; }
+
+    .rite { padding: 22px 20px 20px; }
+
+    .rite-header {
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .rite-price { text-align: left; }
+
+    .high-ticket { padding: 28px 20px; }
+
+    .ht-usd { font-size: 26px; }
+
+    .high-ticket-systems { gap: 6px; }
+
+    .system-tag { font-size: 7.5px; padding: 4px 10px; }
+
+    .rite.featured::after {
+      font-size: 6.5px;
+      right: 16px;
+      padding: 3px 8px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- BACK NAVIGATION -->
+<nav class="back-nav">
+  <a href="index.html" class="back-link">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+    All Offerings
+  </a>
+  <span class="back-nav-brand">Karsa Bintang</span>
+</nav>
+
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="brand-mark"><img src="https://i.imgur.com/fxNdma1.png"alt="Karsa Bintang"></div>
+    <div class="brand-name" style="display:none">Karsa Bintang</div>
+    <h1 class="rite-title">Self-Introduction<br><em>Rites</em></h1>
+    <p class="rite-subtitle">A ceremonial encounter with the self you have always been</p>
+  </div>
+
+  <!-- DIVIDER -->
+  <div class="divider">
+    <div class="divider-line"></div>
+    <div class="divider-glyph">✦ ✦ ✦</div>
+    <div class="divider-line"></div>
+  </div>
+
+  <!-- INVOCATION -->
+  <div class="invocation">
+    <p>You come here not to have fun, nor do you come here to satiate your curiosity.<br>
+    You come here to meet yourself at last, finally, for the first time ever.<br>
+    Each rite is a ritual. A passage. And what you find on the other side is all yours.</p>
+  </div>
+
+  <!-- RITES -->
+  <div class="rites">
+
+    <div class="rite">
+      <div class="rite-spread">The Celtic Cross</div>
+      <div class="rite-header">
+        <div class="rite-name">The Initiate</div>
+        <div class="rite-price">
+          <span class="price-usd">$222</span>
+          <span class="price-idr">Rp 3.500.000</span>
+        </div>
+      </div>
+      <p class="rite-description">The first crossing of the threshold. Ten cards laid in the traditional Celtic Cross spread, illuminating where you stand, what surrounds you, and what stirs beneath the surface. A complete portrait of this moment in your becoming.</p>
+    </div>
+
+    <div class="rite featured">
+      <div class="rite-spread">Depth Diagnostics · Dual Deck</div>
+      <div class="rite-header">
+        <div class="rite-name">The Savant</div>
+        <div class="rite-price">
+          <span class="price-usd">$333</span>
+          <span class="price-idr">Rp 5.250.000</span>
+        </div>
+      </div>
+      <p class="rite-description">Two decks in conversation. One reveals, the other confirms. A layered diagnostic that moves beyond surface narrative into the architecture of your patterns, your gifts, and what asks to be seen. Includes a written synthesis delivered after the session.</p>
+    </div>
+
+    <div class="rite">
+      <div class="rite-spread">Opening of the Key · Five Operations</div>
+      <div class="rite-header">
+        <div class="rite-name">The Sage</div>
+        <div class="rite-price">
+          <span class="price-usd">$444</span>
+          <span class="price-idr">Rp 7.500.000</span>
+        </div>
+      </div>
+      <p class="rite-description">The most sacred and complete reading available. Five full operations across the entire deck. A total cartomantic encounter that maps your soul's current chapter with uncommon depth and precision. Reserved for those ready to be fully witnessed. Includes full written report and follow-up Q&A.</p>
+    </div>
+
+  </div>
+
+  <!-- SEPARATOR -->
+  <div class="separator">
+    <div class="separator-line"></div>
+    <div class="separator-symbol">✦ &nbsp; ✦ &nbsp; ✦</div>
+    <div class="separator-line right"></div>
+  </div>
+
+  <!-- HIGH TICKET -->
+  <div class="high-ticket">
+    <div class="high-ticket-eyebrow">The Complete Rite of Passage</div>
+    <div class="high-ticket-name">Know Your Living Soul</div>
+    <p class="high-ticket-tagline">A four-session immersive journey across four systems</p>
+
+    <div class="high-ticket-systems">
+      <span class="system-tag">Ba Zi</span>
+      <span class="system-tag">Western Astrology</span>
+      <span class="system-tag">Human Design</span>
+      <span class="system-tag">Destiny Matrix</span>
+    </div>
+
+    <p class="ht-description">
+      You have always sensed that you are more than what any single system could contain.
+      More than your sun sign. More than your type. More than the story you inherited.<br><br>
+      This container exists for the one who is ready to stop circling the edges of themselves and finally step inside.<br><br>
+      Across four sessions, we draw from Ba Zi, Western Astrology, Human Design, and Destiny Matrix
+      to build a living portrait of who you are, how you move, what holds you back, and where you
+      are being called. Not as separate readings as one unified revelation.
+    </p>
+
+    <div class="thresholds">
+      <div class="threshold">
+        <div class="threshold-number">I · The First Session</div>
+        <div class="threshold-name">The Blueprint</div>
+        <div class="threshold-desc">Who you are at the level of soul. Your elemental nature, your design, your original instruction.</div>
+      </div>
+      <div class="threshold">
+        <div class="threshold-number">II · The Second Session</div>
+        <div class="threshold-name">The Current</div>
+        <div class="threshold-desc">How your energy moves through the world. Your strategy, your authority, your timing.</div>
+      </div>
+      <div class="threshold">
+        <div class="threshold-number">III · The Third Session</div>
+        <div class="threshold-name">The Shadow</div>
+        <div class="threshold-desc">What keeps repeating. The patterns, the blocks, the places where you meet yourself again and again.</div>
+      </div>
+      <div class="threshold">
+        <div class="threshold-number">IV · The Fourth Session</div>
+        <div class="threshold-name">The Horizon</div>
+        <div class="threshold-desc">Where you are being called. Your emerging chapter, your timing, your next becoming.</div>
+      </div>
+    </div>
+
+    <div class="high-ticket-price">
+      <span class="ht-usd">$1,997</span>
+      <span class="ht-idr">Rp 31.500.000</span>
+    </div>
+
+    <ul class="high-ticket-includes">
+      <li>Four live 1:1 sessions · flexible timeline</li>
+      <li>Full multi-system chart report</li>
+      <li>Private Notion resource hub</li>
+      <li>Workbook & integration prompts</li>
+      <li>Voice note check-ins between sessions</li>
+      <li>All sessions recorded</li>
+    </ul>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-wrap">
+    <p class="cta-note">Sessions conducted via video call and onsite (Indonesia only).<br>
+    Written reports delivered within 72 hours.</p>
+    <a href="index.html#booking-form" class="cta-btn">Enter the Rite</a>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <p class="footer-note">Jakarta, Indonesia</p>
+    <div class="footer-brand">Karsa Bintang · Est. 2009</div>
+  </div>
+
+</div>
+</body>
+</html>
