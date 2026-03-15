@@ -777,6 +777,210 @@ body::before {
 @media (max-width: 640px) {
   .hero-logo { width: clamp(180px, 65vw, 280px); margin-bottom: 1rem; }
 }
+
+/* ── SELF-INTRODUCTION RITES FEATURE ── */
+.sir-feature-section { background: linear-gradient(180deg, transparent 0%, rgba(10,14,40,0.5) 100%); }
+
+.sir-invocation {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding: 0 1rem;
+}
+.sir-invocation p {
+  font-size: clamp(1rem, 2vw, 1.15rem);
+  font-style: italic;
+  color: var(--silver-dim);
+  line-height: 1.95;
+  font-weight: 300;
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+.sir-rites-preview {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  margin-bottom: 2.5rem;
+  border: 1px solid rgba(230,193,110,0.1);
+  background: rgba(230,193,110,0.08);
+}
+
+.sir-rite-card {
+  background: var(--navy-card);
+  position: relative;
+  transition: background 0.3s;
+}
+.sir-rite-card:hover { background: var(--navy-hover); }
+.sir-rite-card.sir-featured {
+  background: linear-gradient(160deg, #080e22 0%, #050517 100%);
+  border-top: 2px solid var(--gold-dim);
+}
+
+.sir-rite-inner { padding: 2rem 1.8rem 1.8rem; }
+
+.sir-most-sought {
+  display: block;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.48rem;
+  letter-spacing: 0.22em;
+  color: var(--navy);
+  background: var(--gold);
+  padding: 0.2rem 0.7rem;
+  text-transform: uppercase;
+  margin-bottom: 0.8rem;
+  width: fit-content;
+}
+
+.sir-spread {
+  display: block;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.52rem;
+  letter-spacing: 0.2em;
+  color: var(--gold-dim);
+  text-transform: uppercase;
+  margin-bottom: 0.7rem;
+}
+
+.sir-rite-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin-bottom: 0.8rem;
+}
+
+.sir-rite-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  font-weight: 500;
+  color: var(--silver-bright);
+  letter-spacing: 0.04em;
+}
+
+.sir-rite-price {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem;
+  color: var(--gold-bright);
+  flex-shrink: 0;
+}
+
+.sir-rite-desc {
+  font-size: 0.85rem;
+  font-style: italic;
+  color: var(--silver-dim);
+  line-height: 1.8;
+  font-weight: 300;
+}
+
+.sir-high-ticket {
+  background: var(--navy-card);
+  border: 1px solid rgba(230,193,110,0.15);
+  border-top: 2px solid var(--gold-dim);
+  padding: 2.5rem;
+  margin-bottom: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.sir-ht-eye {
+  display: block;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.52rem;
+  letter-spacing: 0.25em;
+  color: var(--gold-dim);
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.sir-ht-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+  font-weight: 400;
+  color: var(--silver-bright);
+  letter-spacing: 0.06em;
+  margin-bottom: 0.4rem;
+}
+
+.sir-ht-tag {
+  font-size: 0.88rem;
+  font-style: italic;
+  color: var(--silver-dim);
+  margin-bottom: 1rem;
+}
+
+.sir-systems {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.sir-system-tag {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.52rem;
+  letter-spacing: 0.18em;
+  color: var(--gold-dim);
+  text-transform: uppercase;
+  border: 1px solid rgba(230,193,110,0.2);
+  padding: 0.3rem 0.8rem;
+}
+
+.sir-ht-price-row {
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.sir-ht-usd {
+  display: block;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+  color: var(--gold-bright);
+  line-height: 1;
+  margin-bottom: 0.3rem;
+}
+
+.sir-ht-idr {
+  display: block;
+  font-size: 0.85rem;
+  font-style: italic;
+  color: var(--silver-ghost);
+}
+
+.sir-cta-wrap {
+  text-align: center;
+  padding: 1rem 0 2rem;
+}
+
+.sir-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.62rem;
+  letter-spacing: 0.28em;
+  color: var(--gold);
+  border: 1px solid rgba(230,193,110,0.35);
+  padding: 1rem 2.4rem;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: border-color 0.3s, color 0.3s, background 0.3s;
+}
+.sir-cta-btn:hover {
+  border-color: var(--gold-bright);
+  color: var(--gold-bright);
+  background: rgba(230,193,110,0.04);
+}
+.sir-cta-btn svg { transition: transform 0.3s; }
+.sir-cta-btn:hover svg { transform: translateX(4px); }
+
+@media (max-width: 640px) {
+  .sir-rites-preview { grid-template-columns: 1fr; }
+  .sir-rite-inner { padding: 1.5rem 1.2rem; }
+  .sir-high-ticket { flex-direction: column; padding: 1.8rem 1.2rem; }
+  .sir-ht-price-row { text-align: left; }
+}
 </style>
 </head>
 <body>
@@ -1271,6 +1475,88 @@ body::before {
       </div>
     </div>
 
+  </div>
+</section>
+
+<!-- ── SELF-INTRODUCTION RITES FEATURE SECTION ── -->
+<section class="section sir-feature-section" style="border-top: 1px solid var(--divider); padding-top: 6rem;">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-eye">A Separate Rite</span>
+      <h2 class="sec-title">Self-Introduction Rites</h2>
+      <p class="sec-desc">A ceremonial encounter with the self you have always been. For those ready to be fully witnessed.</p>
+      <div class="sec-line"></div>
+    </div>
+
+    <div class="sir-feature-block reveal">
+      <div class="sir-invocation">
+        <p>You come here not to have fun, nor do you come here to satiate your curiosity.<br>
+        You come here to meet yourself at last, finally, for the first time ever.</p>
+      </div>
+
+      <div class="sir-rites-preview">
+
+        <div class="sir-rite-card">
+          <div class="sir-rite-inner">
+            <span class="sir-spread">The Celtic Cross</span>
+            <div class="sir-rite-row">
+              <span class="sir-rite-name">The Initiate</span>
+              <span class="sir-rite-price">$222</span>
+            </div>
+            <p class="sir-rite-desc">The first crossing of the threshold. Ten cards laid in the traditional Celtic Cross spread — a complete portrait of this moment in your becoming.</p>
+          </div>
+        </div>
+
+        <div class="sir-rite-card sir-featured">
+          <div class="sir-rite-inner">
+            <span class="sir-most-sought">Most Sought</span>
+            <span class="sir-spread">Depth Diagnostics · Dual Deck</span>
+            <div class="sir-rite-row">
+              <span class="sir-rite-name">The Savant</span>
+              <span class="sir-rite-price">$333</span>
+            </div>
+            <p class="sir-rite-desc">Two decks in conversation. One reveals, the other confirms. A layered diagnostic that moves beyond surface narrative into the architecture of your patterns.</p>
+          </div>
+        </div>
+
+        <div class="sir-rite-card">
+          <div class="sir-rite-inner">
+            <span class="sir-spread">Opening of the Key · Five Operations</span>
+            <div class="sir-rite-row">
+              <span class="sir-rite-name">The Sage</span>
+              <span class="sir-rite-price">$444</span>
+            </div>
+            <p class="sir-rite-desc">Five full operations across the entire deck. A total cartomantic encounter that maps your soul's current chapter with uncommon depth and precision.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="sir-high-ticket reveal">
+        <div class="sir-ht-top">
+          <span class="sir-ht-eye">The Complete Rite of Passage</span>
+          <h3 class="sir-ht-name">Know Your Living Soul</h3>
+          <p class="sir-ht-tag">A four-session immersive journey across four systems</p>
+          <div class="sir-systems">
+            <span class="sir-system-tag">Ba Zi</span>
+            <span class="sir-system-tag">Western Astrology</span>
+            <span class="sir-system-tag">Human Design</span>
+            <span class="sir-system-tag">Destiny Matrix</span>
+          </div>
+        </div>
+        <div class="sir-ht-price-row">
+          <span class="sir-ht-usd">$1,997</span>
+          <span class="sir-ht-idr">Rp 31.500.000</span>
+        </div>
+      </div>
+
+      <div class="sir-cta-wrap reveal">
+        <a href="self-introduction-rites.html" class="sir-cta-btn">
+          <span>Enter the Rites</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
   </div>
 </section>
 
