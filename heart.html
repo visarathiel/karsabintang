@@ -650,6 +650,16 @@ body::before {
 }
 .book-cta-btn svg { transition: transform 0.3s var(--ease-expo, cubic-bezier(0.16,1,0.3,1)); }
 .book-cta-btn:hover svg { transform: translateX(4px); }
+
+/* ── HERO LOGO ── */
+.hero-logo {
+  width: clamp(160px, 28vw, 280px);
+  height: auto;
+  margin-bottom: 1.8rem;
+  opacity: 0;
+  animation: up 1s ease forwards 0.2s;
+  filter: brightness(1.05);
+}
 </style>
 </head>
 <body>
@@ -664,6 +674,7 @@ body::before {
 
 <!-- HERO -->
 <section class="hero">
+    <img src="https://i.imgur.com/fxNdma1.png" alt="Karsa Bintang" class="hero-logo">
   <p class="hero-eye">A reading space by Karsa Bintang</p>
   <h1 class="hero-name">Love, for the Beloved</h1>
   <p class="hero-sub">Readings for the heart</p>
