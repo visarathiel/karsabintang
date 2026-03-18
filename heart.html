@@ -1,0 +1,1119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/svg+xml" href="karsa-bintang-icon.svg">
+<title>Love, for the Beloved — Karsa Bintang</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;0,700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --plum: #1a0a12;
+  --plum-card: #200d17;
+  --plum-hover: #2e1422;
+
+  /* Text hierarchy — cool whites */
+  --petal: #eef0f5;              /* body text — bright cool white */
+  --petal-bright: #f5c4d3;       /* headings, titles — stays rose-pink */
+  --petal-dim: #b8bfcc;          /* secondary text, poetic lines */
+  --petal-ghost: #5e6470;        /* labels, small caps, least prominent */
+
+  /* Rose — accents, prices, buttons, borders */
+  --rose: #d4607a;
+  --rose-dim: #b04d65;
+  --rose-bright: #e88099;
+  --rose-glow: rgba(212,96,122,0.1);
+  --divider: rgba(212,96,122,0.12);
+  --divider-subtle: rgba(232,160,180,0.06);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--plum);
+  color: var(--petal);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 17px;
+  line-height: 1.75;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+}
+
+.starfield { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
+.star {
+  position: absolute;
+  border-radius: 50%;
+  background: #f5c4d3;
+  animation: twinkle var(--d) ease-in-out infinite var(--delay);
+  opacity: 0;
+}
+@keyframes twinkle {
+  0%,100% { opacity: 0; }
+  50% { opacity: var(--op); }
+}
+
+.wrap { max-width: 860px; margin: 0 auto; padding: 0 2rem; position: relative; z-index: 2; }
+
+/* ── NAV BACK ── */
+.nav-back {
+  position: fixed;
+  top: 1.5rem;
+  left: 2rem;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.58rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--petal-dim);
+  text-decoration: none;
+  transition: color 0.25s;
+}
+.nav-back:hover { color: var(--petal-bright); }
+.nav-back svg { width: 12px; height: 12px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; }
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 5rem 2rem;
+  position: relative;
+  z-index: 2;
+}
+
+.hero-eye {
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
+  color: var(--rose-dim);
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+  opacity: 0;
+  animation: up 1s ease forwards 0.2s;
+}
+
+.hero-name {
+  font-size: clamp(2.2rem, 7vw, 4.5rem);
+  font-weight: 400;
+  color: var(--petal-bright);
+  letter-spacing: 0.06em;
+  line-height: 1.15;
+  margin-bottom: 0.8rem;
+  font-style: italic;
+  opacity: 0;
+  animation: up 1s ease forwards 0.4s;
+}
+
+.hero-sub {
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  font-style: normal;
+  color: var(--petal-dim);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 300;
+  margin-bottom: 2.5rem;
+  opacity: 0;
+  animation: up 1s ease forwards 0.55s;
+}
+
+.hero-rule {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  margin-bottom: 2rem;
+  opacity: 0;
+  animation: up 1s ease forwards 0.7s;
+}
+.hero-rule::before, .hero-rule::after {
+  content: '';
+  width: 80px;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--rose-dim));
+}
+.hero-rule::after { background: linear-gradient(to left, transparent, var(--rose-dim)); }
+.hero-rule span { color: var(--rose-dim); font-size: 0.7rem; letter-spacing: 0.18em; }
+
+.hero-tagline {
+  font-size: clamp(1rem, 2.2vw, 1.3rem);
+  font-style: italic;
+  color: var(--petal);
+  max-width: 460px;
+  line-height: 1.9;
+  font-weight: 300;
+  opacity: 0;
+  animation: up 1s ease forwards 0.85s;
+}
+
+.hero-badge {
+  margin-top: 2.5rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  border: 1px solid rgba(212,96,122,0.35);
+  padding: 0.7rem 1.6rem;
+  opacity: 0;
+  animation: up 1s ease forwards 1.05s;
+}
+.hero-badge span {
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  color: var(--rose-bright);
+  text-transform: uppercase;
+}
+.hero-badge .dot { width: 2px; height: 2px; border-radius: 50%; background: var(--rose-dim); }
+
+@keyframes up {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ── SECTION ── */
+.section { padding: 5rem 0; position: relative; z-index: 2; }
+
+.sec-head { text-align: center; margin-bottom: 3.5rem; }
+.sec-eye {
+  font-size: 0.6rem;
+  letter-spacing: 0.25em;
+  color: var(--rose-dim);
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 0.8rem;
+}
+.sec-title {
+  font-size: clamp(1.3rem, 3vw, 1.8rem);
+  font-weight: 400;
+  color: var(--petal-bright);
+  letter-spacing: 0.06em;
+  margin-bottom: 0.8rem;
+}
+.sec-desc {
+  font-size: 0.95rem;
+  color: var(--petal);
+  font-style: italic;
+  max-width: 480px;
+  margin: 0 auto;
+  line-height: 1.8;
+}
+.sec-line {
+  width: 50px; height: 1px;
+  background: linear-gradient(to right, transparent, var(--rose-dim), transparent);
+  margin: 1.5rem auto 0;
+}
+
+/* ── ABOUT ── */
+.about-section {
+  padding: 5rem 0 4rem;
+  position: relative;
+  z-index: 2;
+  border-top: 1px solid var(--divider);
+}
+.about-inner { max-width: 680px; margin: 0 auto; text-align: center; }
+.about-body { display: flex; flex-direction: column; gap: 1.5rem; }
+.about-body p {
+  font-size: clamp(1rem, 2vw, 1.1rem);
+  color: var(--petal);
+  line-height: 1.95;
+  font-weight: 300;
+  text-align: justify;
+}
+
+/* ── TIER HEADER ── */
+.tier-block { margin-bottom: 5rem; }
+.tier-header {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--divider);
+}
+.tier-num {
+  font-size: 2.5rem;
+  color: rgba(212,96,122,0.15);
+  line-height: 1;
+  flex-shrink: 0;
+  font-weight: 300;
+}
+.tier-name {
+  font-size: 1.1rem;
+  color: var(--petal-bright);
+  letter-spacing: 0.08em;
+  display: block;
+  margin-bottom: 0.2rem;
+}
+.tier-meaning {
+  font-size: 0.85rem;
+  font-style: italic;
+  color: var(--petal);
+}
+.tier-tag {
+  margin-left: auto;
+  font-size: 0.55rem;
+  letter-spacing: 0.18em;
+  color: var(--rose-dim);
+  text-transform: uppercase;
+  border: 1px solid var(--rose-dim);
+  padding: 0.3rem 0.8rem;
+  white-space: nowrap;
+}
+
+/* ── CARD ── */
+.card {
+  background: var(--plum-card);
+  border: 1px solid rgba(212,96,122,0.08);
+  margin-bottom: 1.2rem;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.3s, transform 0.3s;
+}
+.card::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(212,96,122,0.2), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.card:hover { border-color: rgba(212,96,122,0.2); transform: translateY(-1px); }
+.card:hover::after { opacity: 1; }
+
+.card-body { padding: 2rem 2.5rem; }
+.card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-bottom: 0.8rem;
+}
+.card-num {
+  font-size: 0.55rem;
+  letter-spacing: 0.2em;
+  color: var(--rose-dim);
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 0.4rem;
+}
+.card-title {
+  font-size: clamp(1rem, 2.5vw, 1.3rem);
+  font-weight: 400;
+  color: var(--petal-bright);
+  letter-spacing: 0.04em;
+  line-height: 1.3;
+}
+.bestseller {
+  display: inline-block;
+  font-size: 0.48rem;
+  letter-spacing: 0.2em;
+  color: var(--plum);
+  background: var(--rose);
+  padding: 0.15rem 0.6rem;
+  text-transform: uppercase;
+  margin-left: 0.8rem;
+  vertical-align: middle;
+}
+.card-price { text-align: right; flex-shrink: 0; }
+.price-usd {
+  font-size: 1.3rem;
+  color: var(--rose-bright);
+  display: block;
+  line-height: 1.2;
+}
+.price-idr {
+  font-size: 1rem;
+  color: var(--petal-dim);
+  font-style: italic;
+  display: block;
+}
+.card-poetic {
+  font-size: 0.95rem;
+  font-style: italic;
+  color: var(--petal-dim);
+  margin-bottom: 1rem;
+  font-weight: 300;
+  line-height: 1.7;
+}
+.card-desc {
+  font-size: 0.88rem;
+  color: var(--petal);
+  line-height: 1.85;
+  font-weight: 300;
+}
+.pdf-included {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.5rem;
+  letter-spacing: 0.2em;
+  color: var(--rose-dim);
+  text-transform: uppercase;
+  border: 1px solid rgba(212,96,122,0.15);
+  padding: 0.2rem 0.6rem;
+  margin-top: 0.5rem;
+}
+
+/* ── ORDER ── */
+.order-section {
+  padding: 5rem 0 6rem;
+  position: relative;
+  z-index: 2;
+  border-top: 1px solid var(--divider);
+}
+.order-steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 4rem;
+}
+.step-card {
+  background: var(--plum-card);
+  border: 1px solid rgba(212,96,122,0.08);
+  padding: 2rem 1.5rem;
+  text-align: center;
+  transition: border-color 0.3s;
+}
+.step-card:hover { border-color: rgba(212,96,122,0.2); }
+.step-num {
+  font-size: 2rem;
+  color: rgba(212,96,122,0.1);
+  line-height: 1;
+  margin-bottom: 0.8rem;
+  display: block;
+}
+.step-title {
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  color: var(--rose-bright);
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 0.6rem;
+}
+.step-desc {
+  font-size: 0.88rem;
+  color: var(--petal);
+  font-style: italic;
+  line-height: 1.6;
+}
+
+/* ── FORM ── */
+.form-wrap {
+  background: var(--plum-card);
+  border: 1px solid rgba(212,96,122,0.1);
+  padding: 3rem;
+  position: relative;
+}
+.form-wrap::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--rose-dim), transparent);
+}
+.form-title {
+  font-size: 1rem;
+  color: var(--petal-bright);
+  letter-spacing: 0.08em;
+  margin-bottom: 0.4rem;
+}
+.form-subtitle {
+  font-size: 0.88rem;
+  font-style: italic;
+  color: var(--petal-dim);
+  margin-bottom: 2.5rem;
+  line-height: 1.6;
+}
+.form-group-title {
+  font-size: 0.58rem;
+  letter-spacing: 0.2em;
+  color: var(--rose-dim);
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 1.2rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid var(--divider);
+}
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.2rem;
+  margin-bottom: 2rem;
+}
+.field { display: flex; flex-direction: column; gap: 0.4rem; }
+.field.full { grid-column: 1 / -1; }
+.field label {
+  font-size: 0.55rem;
+  letter-spacing: 0.18em;
+  color: var(--petal-ghost);
+  text-transform: uppercase;
+}
+.field input,
+.field select,
+.field textarea {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(212,96,122,0.1);
+  color: var(--petal-bright);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.95rem;
+  padding: 0.65rem 0.9rem;
+  outline: none;
+  transition: border-color 0.25s, background 0.25s;
+  width: 100%;
+  appearance: none;
+  -webkit-appearance: none;
+  border-radius: 0;
+}
+.field input::placeholder,
+.field textarea::placeholder { color: #7a5a68; font-style: italic; }
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  border-color: var(--rose-dim);
+  background: rgba(212,96,122,0.04);
+}
+.field select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23b04d65'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.9rem center;
+  padding-right: 2.2rem;
+  cursor: pointer;
+}
+.field select option { background: var(--plum-card); color: var(--petal); }
+.field textarea { resize: vertical; min-height: 90px; line-height: 1.6; }
+.form-separator { margin: 2rem 0; border: none; border-top: 1px solid var(--divider); }
+.submit-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+.submit-note {
+  font-size: 0.82rem;
+  font-style: italic;
+  color: var(--petal-ghost);
+  line-height: 1.6;
+  max-width: 380px;
+}
+.submit-btn {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--plum);
+  background: var(--rose);
+  border: none;
+  padding: 0.9rem 2.2rem;
+  cursor: pointer;
+  transition: background 0.25s, transform 0.2s;
+  flex-shrink: 0;
+}
+.submit-btn:hover { background: var(--rose-bright); transform: translateY(-1px); }
+
+/* ── REVEAL ── */
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal.on { opacity: 1; transform: translateY(0); }
+
+/* ── FOOTER ── */
+.footer {
+  padding: 5rem 0 3rem;
+  text-align: center;
+  border-top: 1px solid var(--divider);
+  position: relative;
+  z-index: 2;
+}
+.footer-name {
+  font-size: 1.1rem;
+  font-style: italic;
+  color: var(--petal-bright);
+  letter-spacing: 0.08em;
+  margin-bottom: 0.3rem;
+}
+.footer-parent {
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--petal-ghost);
+  margin-bottom: 0.6rem;
+}
+.footer-parent a {
+  color: var(--rose-dim);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.footer-parent a:hover { color: var(--rose-bright); }
+.footer-promise {
+  font-size: 0.95rem;
+  font-style: italic;
+  color: var(--petal-dim);
+  max-width: 340px;
+  margin: 0 auto 2rem;
+  line-height: 1.9;
+}
+.footer-copy {
+  font-size: 0.55rem;
+  letter-spacing: 0.18em;
+  color: rgba(212,96,122,0.2);
+  text-transform: uppercase;
+}
+.footer-social {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.4rem;
+  margin-top: 1.8rem;
+}
+.social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border: 1px solid rgba(212,96,122,0.2);
+  color: var(--rose-dim);
+  text-decoration: none;
+  transition: border-color 0.25s, color 0.25s, transform 0.25s;
+}
+.social-link:hover { border-color: var(--rose-bright); color: var(--rose-bright); transform: translateY(-2px); }
+.social-link svg { width: 16px; height: 16px; fill: currentColor; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 640px) {
+  .hero { padding: 4rem 1.5rem 3rem; min-height: auto; }
+  .section { padding: 3rem 0; }
+  .about-section { padding: 3rem 0 2.5rem; }
+  .order-section { padding: 3rem 0 4rem; }
+  .tier-header { flex-wrap: wrap; gap: 0.8rem; padding-bottom: 1rem; margin-bottom: 1.5rem; }
+  .tier-tag { margin-left: 0; }
+  .card-body { padding: 1.4rem 1.2rem; }
+  .card-top { flex-direction: column; gap: 0.3rem; }
+  .card-price { text-align: left; }
+  .order-steps { grid-template-columns: 1fr; }
+  .form-wrap { padding: 1.5rem 1.2rem; }
+  .form-grid { grid-template-columns: 1fr; }
+  .field.full { grid-column: 1; }
+  .submit-row { flex-direction: column; align-items: stretch; }
+  .submit-btn { width: 100%; text-align: center; justify-content: center; }
+  .nav-back { left: 1.2rem; }
+}
+
+/* ── BOOK CTA ── */
+.book-cta-section {
+  position: relative;
+  z-index: 2;
+  padding: clamp(3rem, 6vw, 5rem) 0;
+  border-top: 1px solid var(--divider);
+  text-align: center;
+}
+.book-cta-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2rem;
+}
+.book-cta-note {
+  font-size: 0.88rem;
+  font-style: italic;
+  color: var(--petal-ghost);
+  letter-spacing: 0.04em;
+}
+.book-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.62rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--rose);
+  border: 1px solid rgba(212,96,122,0.35);
+  padding: 1rem 2.4rem;
+  text-decoration: none;
+  transition: border-color 0.3s, background 0.3s;
+}
+.book-cta-btn:hover {
+  border-color: rgba(212,96,122,0.7);
+  background: rgba(212,96,122,0.05);
+}
+.book-cta-btn svg { transition: transform 0.3s var(--ease-expo, cubic-bezier(0.16,1,0.3,1)); }
+.book-cta-btn:hover svg { transform: translateX(4px); }
+</style>
+</head>
+<body>
+
+<div class="starfield" id="sf"></div>
+
+<!-- NAV BACK -->
+<a href="index.html" class="nav-back">
+  <svg viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  Karsa Bintang
+</a>
+
+<!-- HERO -->
+<section class="hero">
+  <p class="hero-eye">A reading space by Karsa Bintang</p>
+  <h1 class="hero-name">Love, for the Beloved</h1>
+  <p class="hero-sub">Readings for the heart</p>
+  <div class="hero-rule"><span>✦ ✦ ✦</span></div>
+  <p class="hero-tagline">To soothe the wary souls.</p>
+  <div class="hero-badge">
+    <span>Tarot</span>
+    <span class="dot"></span>
+    <span>Astrology</span>
+    <span class="dot"></span>
+    <span>I Ching</span>
+    <span class="dot"></span>
+    <span>Ba Zi</span>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about-section">
+  <div class="wrap">
+    <div class="about-inner reveal">
+      <span class="sec-eye">About this space</span>
+      <h2 class="sec-title" style="margin-bottom:2rem">For those who have loved, and are still learning how.</h2>
+      <div class="about-body">
+        <p>Some questions do not belong in the language of strategy. They belong in the language of the heart — where certainty is rare, feeling is everything, and the space between two people holds more meaning than either of them can say.</p>
+        <p>Love, for the Beloved is a reading space devoted entirely to those questions. To the ones you carry quietly: whether someone feels what you feel, whether what you had is truly over, whether the person standing in front of you is the one written in your stars. To the wounds that have not fully closed, and the hopes that have not fully dimmed.</p>
+        <p>These readings are drawn from the same practice as Karsa Bintang — 16+ years, multiple systems, rigour and intuition in equal measure. But they speak a different language here. Slower. More gentle. Because the wary soul does not need to be pushed. It needs to be witnessed.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OFFERINGS -->
+<section class="section">
+  <div class="wrap">
+
+    <div class="sec-head reveal">
+      <span class="sec-eye">The Offerings</span>
+      <h2 class="sec-title">All Readings</h2>
+      <p class="sec-desc">Each reading is crafted to meet the question you are actually carrying — not the one that is easiest to ask.</p>
+      <div class="sec-line"></div>
+    </div>
+
+    <!-- TIER A: QUICK ANSWERS -->
+    <div class="tier-block reveal">
+      <div class="tier-header">
+        <span class="tier-num">I</span>
+        <div>
+          <span class="tier-name">THE QUESTION</span>
+          <span class="tier-meaning"><i>For the one burning thought you cannot silence.</i></span>
+        </div>
+        <span class="tier-tag">Quick answers</span>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <div class="card-top">
+            <div>
+              <span class="card-num">01</span>
+              <h3 class="card-title">Will We?</h3>
+            </div>
+            <div class="card-price">
+              <span class="price-usd">$35</span>
+              <span class="price-idr">IDR 449k</span>
+            </div>
+          </div>
+          <p class="card-poetic">One question about one person. A direct answer, and what the energy says about timing.</p>
+          <p class="card-desc">For when you have one burning question about a specific person or situation and need the cards to speak plainly. Will they come back? Is this worth pursuing? Should I say something? A focused, honest reading — no fluff, no false comfort.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <div class="card-top">
+            <div>
+              <span class="card-num">02</span>
+              <h3 class="card-title">What Do They Think of Me?</h3>
+            </div>
+            <div class="card-price">
+              <span class="price-usd">$95</span>
+              <span class="price-idr">IDR 1.299k</span>
+            </div>
+          </div>
+          <p class="card-poetic">The question you keep returning to, answered honestly by the stars.</p>
+          <p class="card-desc">There is a particular uncertainty that lives in the space between two people — where words are ambiguous and signals are mixed. This reading looks at one specific person and reads the energetic truth of how they hold you: their perception, their feelings, their intentions, and what the energy between you is moving toward.</p>
+          <span class="pdf-included">✦ PDF Report Included</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <div class="card-top">
+            <div>
+              <span class="card-num">03</span>
+              <h3 class="card-title">Love Timing Reading</h3>
+            </div>
+            <div class="card-price">
+              <span class="price-usd">$85</span>
+              <span class="price-idr">IDR 1.099k</span>
+            </div>
+          </div>
+          <p class="card-poetic">Love has seasons. This reading tells you which one you are in.</p>
+          <p class="card-desc">An astrological and Tarot reading focused entirely on timing — when the energy opens for love, reunion, or resolution. For those waiting on something or someone, who need to know whether to hold on or let go, and when the window of movement arrives. Grounded in current transits and the I Ching posture of the moment.</p>
+          <span class="pdf-included">✦ PDF Report Included</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- TIER B: RELATIONSHIP READINGS -->
+    <div class="tier-block reveal">
+      <div class="tier-header">
+        <span class="tier-num">II</span>
+        <div>
+          <span class="tier-name">THE BOND</span>
+          <span class="tier-meaning"><i>For those in it — and those wondering whether they should be.</i></span>
+        </div>
+        <span class="tier-tag">Relationship readings</span>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <div class="card-top">
+            <div>
+              <span class="card-num">04</span>
+              <h3 class="card-title">The Relationship Reading</h3>
+            </div>
+            <div class="card-price">
+              <span class="price-usd">$110</span>
+              <span class="price-idr">IDR 1.499k</span>
+            </div>
+          </div>
+          <p class="card-poetic">What this bond is truly made of — and where it is truly going.</p>
+          <p class="card-desc">A comprehensive reading of an existing relationship — romantic, familial, or otherwise significant. What you are to each other cosmically, the patterns playing out between you, the strengths and tensions inherent to this bond, and what the stars say about its trajectory.</p>
+          <span class="pdf-included">✦ PDF Report Included</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <div class="card-top">
+            <div>
+              <span class="card-num">05</span>
+              <h3 class="card-title">The Soulmate Reading <span class="bestseller">Bestseller</span></h3>
+            </div>
+            <div class="card-price">
+              <span class="price-usd">$120</span>
+              <span class="price-idr">IDR 1.499k</span>
+            </div>
+          </div>
+          <p class="card-poetic">Someone was written in your stars before you knew what love was. This reading finds them.</p>
+          <p class="card-desc">Some connections are designed to find each other, to teach each other, to build something together that neither could alone. This reading examines the person the stars have written into your story — their nature, your dynamic, and the life you are destined to build together.</p>
+          <span class="pdf-included">✦ PDF Report Included</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <div class="card-top">
+            <div>
+              <span class="card-num">06</span>
+              <h3 class="card-title">Compatibility Reading</h3>
+            </div>
+            <div class="card-price">
+              <span class="price-usd">$130</span>
+              <span class="price-idr">IDR 1.799k</span>
+            </div>
+          </div>
+          <p class="card-poetic">Two charts. One question. How do you fit together — and what do you need to know?</p>
+          <p class="card-desc">A synastry reading of two natal charts — examining how your planets interact, where you naturally flow together, where friction lives, and what this pairing is cosmically designed to teach you both. For couples who want to understand their dynamic more deeply, or for those considering whether to go deeper with someone. Requires both birth dates, times, and places.</p>
+          <span class="pdf-included">✦ PDF Report Included</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <div class="card-top">
+            <div>
+              <span class="card-num">07</span>
+              <h3 class="card-title">Are We Over?</h3>
+            </div>
+            <div class="card-price">
+              <span class="price-usd">$95</span>
+              <span class="price-idr">IDR 1.299k</span>
+            </div>
+          </div>
+          <p class="card-poetic">Sometimes the hardest question is the one you already know the answer to. This reading tells you the truth.</p>
+          <p class="card-desc">For relationships that feel uncertain — suspended between staying and leaving, between hope and acceptance. We read the current energetic state of the bond, whether there is still a living thread between you, and what the cards say about the road that lies ahead. Honest, compassionate, and clear.</p>
+          <span class="pdf-included">✦ PDF Report Included</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <div class="card-top">
+            <div>
+              <span class="card-num">08</span>
+              <h3 class="card-title">Past Life Connection</h3>
+            </div>
+            <div class="card-price">
+              <span class="price-usd">$110</span>
+              <span class="price-idr">IDR 1.499k</span>
+            </div>
+          </div>
+          <p class="card-poetic">Some loves feel like memory. Like you have done this before. This reading looks at why.</p>
+          <p class="card-desc">A reading of the karmic thread between you and one specific person — what past life energy is present in this connection, what wound or contract you are here to complete together, and what this relationship is asking you to heal, release, or receive. For those who feel inexplicably drawn to someone and need to understand why.</p>
+          <span class="pdf-included">✦ PDF Report Included</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- TIER C: SELF IN LOVE -->
+    <div class="tier-block reveal">
+      <div class="tier-header">
+        <span class="tier-num">III</span>
+        <div>
+          <span class="tier-name">THE SELF</span>
+          <span class="tier-meaning"><i>For those who want to understand their own heart first.</i></span>
+        </div>
+        <span class="tier-tag">Self in love</span>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <div class="card-top">
+            <div>
+              <span class="card-num">09</span>
+              <h3 class="card-title">Your Love Blueprint</h3>
+            </div>
+            <div class="card-price">
+              <span class="price-usd">$120</span>
+              <span class="price-idr">IDR 1.699k</span>
+            </div>
+          </div>
+          <p class="card-poetic">You were born with a particular way of loving. This reading shows you what it is.</p>
+          <p class="card-desc">An astrological reading of your natal chart focused entirely on love — your Venus sign, your 5th and 7th houses, your attachment patterns, what you need to feel truly loved, and the kind of person written in your chart as your complement. For those who want to understand their own heart before looking for someone else to fill it. Requires birth date, time, and place.</p>
+          <span class="pdf-included">✦ PDF Report Included</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <div class="card-top">
+            <div>
+              <span class="card-num">10</span>
+              <h3 class="card-title">Healing the Heart Reading</h3>
+            </div>
+            <div class="card-price">
+              <span class="price-usd">$95</span>
+              <span class="price-idr">IDR 1.299k</span>
+            </div>
+          </div>
+          <p class="card-poetic">Some of us carry old love like a wound. This reading shows you where it lives — and how to release it.</p>
+          <p class="card-desc">A Tarot and astrological reading focused on healing after loss, betrayal, or a love that didn't become what you hoped. We identify the energetic block, the belief that formed from the wound, and what the cards say about the path back to openness. Not about moving on quickly — about moving through with grace.</p>
+          <span class="pdf-included">✦ PDF Report Included</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- TIER D: GIFTS -->
+    <div class="tier-block reveal">
+      <div class="tier-header">
+        <span class="tier-num">IV</span>
+        <div>
+          <span class="tier-name">THE GIFT</span>
+          <span class="tier-meaning"><i>For someone you carry in your heart.</i></span>
+        </div>
+        <span class="tier-tag">For the beloved</span>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <div class="card-top">
+            <div>
+              <span class="card-num">11</span>
+              <h3 class="card-title">Channeled Letter for the Beloved</h3>
+            </div>
+            <div class="card-price">
+              <span class="price-usd">$55</span>
+              <span class="price-idr">IDR 699k</span>
+            </div>
+          </div>
+          <p class="card-poetic">The words they carry but have never said — written at last, through the stars.</p>
+          <p class="card-desc">A channeled letter written from one specific person to another, transmitted through divination and delivered with care. The unspoken truths, the unexpressed tenderness, the things that live in the space between two people. A gift, an act of love, or simply the truth made visible. Delivered as a beautifully formatted PDF.</p>
+          <span class="pdf-included">✦ PDF Report Included</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <div class="card-top">
+            <div>
+              <span class="card-num">12</span>
+              <h3 class="card-title">Channeled Poem for the Beloved</h3>
+            </div>
+            <div class="card-price">
+              <span class="price-usd">$45</span>
+              <span class="price-idr">IDR 549k</span>
+            </div>
+          </div>
+          <p class="card-poetic">Some truths are too alive for prose. This is the one that becomes a poem.</p>
+          <p class="card-desc">A channeled poem written from one soul to another — drawn from the energetic field between two people and given form through language. Where the Letter is expansive, the Poem is concentrated: every word chosen, every line essential. A rare and intimate gift for those who understand that the most honest things are sometimes the most beautiful.</p>
+          <span class="pdf-included">✦ PDF Report Included</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <div class="card-top">
+            <div>
+              <span class="card-num">13</span>
+              <h3 class="card-title">Gift Reading</h3>
+            </div>
+            <div class="card-price">
+              <span class="price-usd">$75</span>
+              <span class="price-idr">IDR 999k</span>
+            </div>
+          </div>
+          <p class="card-poetic">The most personal gift you can give — a reading written entirely for them.</p>
+          <p class="card-desc">A reading purchased as a gift for someone else. We deliver the reading directly to the recipient, or to you to present as you wish. Includes a personalised gift note from you, formatted beautifully alongside the reading. For the person in your life who has been curious, who is at a crossroads, or who simply deserves to be seen. Delivered as a PDF gift package.</p>
+          <span class="pdf-included">✦ PDF Gift Package Included</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ── BOOK A READING ── -->
+<div class="book-cta-section">
+  <div class="wrap">
+    <div class="book-cta-inner reveal">
+      <p class="book-cta-note">Ready to begin?</p>
+      <a href="index.html#booking-form" class="book-cta-btn">
+        Book a Reading
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+</div>
+
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="wrap">
+    <p class="footer-name">Love, for the Beloved</p>
+    <p class="footer-parent">A reading space by <a href="index.html">Karsa Bintang</a></p>
+    <p class="footer-promise">To soothe the wary souls.</p>
+    <p class="footer-copy">EST. 2020. All rights reserved.</p>
+    <div class="footer-social">
+      <a href="https://twitter.com/karsabintang" target="_blank" rel="noopener" class="social-link" aria-label="Twitter">
+        <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.259 5.631 5.905-5.631zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+      </a>
+      <a href="https://instagram.com/karsabintang" target="_blank" rel="noopener" class="social-link" aria-label="Instagram">
+        <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+      </a>
+    </div>
+  </div>
+</footer>
+
+<script>
+const sf = document.getElementById('sf');
+for (let i = 0; i < 120; i++) {
+  const s = document.createElement('div');
+  s.classList.add('star');
+  const sz = Math.random() * 1.6 + 0.3;
+  s.style.cssText = `width:${sz}px;height:${sz}px;left:${Math.random()*100}%;top:${Math.random()*100}%;--d:${Math.random()*5+2}s;--delay:-${Math.random()*6}s;--op:${Math.random()*0.3+0.05}`;
+  sf.appendChild(s);
+}
+
+const obs = new IntersectionObserver(entries => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('on'), i * 60);
+      obs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+
+<script>
+async function handleSubmit() {
+  const get = id => document.getElementById(id)?.value?.trim() || '';
+  const name     = get('f-name');
+  const email    = get('f-email');
+  const origin   = get('f-origin');
+  const residence= get('f-residence');
+  const social   = get('f-social');
+  const birthday = get('f-birthday');
+  const pkg      = get('f-package');
+  const lang     = get('f-language');
+  const question = get('f-question');
+  const notes    = get('f-notes');
+
+  if (!name || !email || !pkg) {
+    alert('Please fill in at least your name, email, and reading before submitting.');
+    return;
+  }
+
+  const btn = document.querySelector('#form-footer .submit-btn');
+  btn.textContent = 'Sending...';
+  btn.disabled = true;
+
+  try {
+    await fetch('https://formspree.io/f/mbdzlzbw', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({
+        source: 'Love, for the Beloved',
+        name, email,
+        country_of_origin: origin,
+        country_of_residence: residence,
+        social_media: social,
+        birthday,
+        reading_package: pkg,
+        language: lang,
+        question,
+        notes
+      })
+    });
+  } catch(e) {
+    console.warn('Formspree error:', e);
+  }
+
+  const waMsg = [
+    '✦ *Love, for the Beloved — Reading Request*',
+    '',
+    '*— Details —*',
+    `Name: ${name}`,
+    `Email: ${email}`,
+    `Country of Origin: ${origin || '—'}`,
+    `Country of Residence: ${residence || '—'}`,
+    `Social Media: ${social || '—'}`,
+    `Birthday: ${birthday || '—'}`,
+    '',
+    '*— Reading —*',
+    `Package: ${pkg}`,
+    `Language: ${lang || '—'}`,
+    `Question: ${question || '—'}`,
+    `Notes: ${notes || '—'}`
+  ].join('\n');
+
+  document.getElementById('wa-btn').onclick = () => {
+    window.open('https://wa.me/6285128021965?text=' + encodeURIComponent(waMsg), '_blank');
+  };
+
+  document.getElementById('form-footer').style.display = 'none';
+  document.getElementById('success-msg').style.display = 'block';
+}
+</script>
+
+</body>
+</html>

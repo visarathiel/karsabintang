@@ -1,0 +1,1286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/svg+xml" href="karsa-bintang-icon.svg">
+<title>Karsa Bintang — Offerings</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;0,700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #02020D;
+  --navy-card: #050517;
+  --navy-hover: #131f35;
+  --silver: #c4d0e8;
+  --silver-bright: #e4ecf8;
+  --silver-dim: #BFCAE0;
+  --silver-ghost: #4a5a78;
+  --gold: #e6c16e;
+  --gold-dim: #c9a254;
+  --gold-bright: #f0d484;
+  --gold-glow: rgba(230,193,110,0.1);
+  --white: #eef2fc;
+  --divider: rgba(230,193,110,0.12);
+  --divider-subtle: rgba(196,208,232,0.06);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--navy);
+  color: var(--silver);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 17px;
+  line-height: 1.75;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+}
+
+.starfield { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
+.star {
+  position: absolute;
+  border-radius: 50%;
+  background: #e8d898;
+  animation: twinkle var(--d) ease-in-out infinite var(--delay);
+  opacity: 0;
+}
+@keyframes twinkle {
+  0%,100% { opacity: 0; }
+  50% { opacity: var(--op); }
+}
+
+.wrap { max-width: 860px; margin: 0 auto; padding: 0 2rem; position: relative; z-index: 2; }
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 5rem 2rem;
+  position: relative;
+  z-index: 2;
+}
+
+.hero-eye {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
+  color: var(--gold-dim);
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+  opacity: 0;
+  animation: up 1s ease forwards 0.2s;
+}
+
+.hero-name {
+  font-style: italic;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.8rem, 8vw, 5.5rem);
+  font-weight: 600;
+  color: var(--silver-bright);
+  letter-spacing: 0.1em;
+  line-height: 1;
+  margin-bottom: 0.6rem;
+  opacity: 0;
+  animation: up 1s ease forwards 0.4s;
+}
+
+
+.hero-sub {
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  font-style: normal;
+  color: var(--silver-dim);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 300;
+  margin-bottom: 2.5rem;
+  opacity: 0;
+  animation: up 1s ease forwards 0.55s;
+}
+
+.hero-tagline {
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
+  font-style: italic;
+  color: var(--silver-dim);
+  letter-spacing: 0.06em;
+  margin-bottom: 3rem;
+  opacity: 0;
+  animation: up 1s ease forwards 0.6s;
+}
+
+.hero-rule {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  margin-bottom: 2.5rem;
+  opacity: 0;
+  animation: up 1s ease forwards 0.8s;
+}
+.hero-rule::before, .hero-rule::after {
+  content: '';
+  width: 100px;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--gold-dim));
+}
+.hero-rule::after { background: linear-gradient(to left, transparent, var(--gold-dim)); }
+.hero-rule span { color: var(--gold-dim); font-size: 0.7rem; letter-spacing: 0.18em; }
+
+.hero-quote {
+  font-size: clamp(1rem, 2.2vw, 1.25rem);
+  font-style: italic;
+  color: var(--silver);
+  max-width: 500px;
+  line-height: 1.9;
+  font-weight: 300;
+  opacity: 0;
+  animation: up 1s ease forwards 1s;
+}
+
+.hero-badge {
+  margin-top: 2.5rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  border: 1px solid rgba(230,193,110,0.4);
+  padding: 0.7rem 1.6rem;
+  opacity: 0;
+  animation: up 1s ease forwards 1.2s;
+}
+.hero-badge span {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.25em;
+  color: var(--gold-bright);
+  text-transform: uppercase;
+}
+.hero-badge .dot { width: 2px; height: 2px; border-radius: 50%; background: var(--gold-dim); }
+
+@keyframes up {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ── SECTION ── */
+.section { padding: 5rem 0; position: relative; z-index: 2; }
+
+.sec-head { text-align: center; margin-bottom: 3.5rem; }
+.sec-eye {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.25em;
+  color: var(--gold-dim);
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 0.8rem;
+}
+.sec-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.3rem, 3vw, 1.8rem);
+  font-weight: 400;
+  color: var(--silver-bright);
+  letter-spacing: 0.06em;
+  margin-bottom: 0.8rem;
+}
+.sec-desc {
+  font-size: 0.95rem;
+  color: var(--silver-dim);
+  font-style: italic;
+  max-width: 480px;
+  margin: 0 auto;
+  line-height: 1.8;
+}
+.sec-line {
+  width: 50px; height: 1px;
+  background: linear-gradient(to right, transparent, var(--gold-dim), transparent);
+  margin: 1.5rem auto 0;
+}
+
+/* ── LAYER HEADER ── */
+.layer-header {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--divider);
+}
+.layer-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.5rem;
+  color: #F5D287;
+  line-height: 1;
+  flex-shrink: 0;
+}
+.layer-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem;
+  color: var(--silver-bright);
+  letter-spacing: 0.08em;
+  display: block;
+  margin-bottom: 0.2rem;
+}
+.layer-meaning {
+  font-size: 0.85rem;
+  font-style: italic;
+  color: var(--silver-dim);
+}
+.layer-tag {
+  margin-left: auto;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.55rem;
+  letter-spacing: 0.18em;
+  color: var(--gold-dim);
+  text-transform: uppercase;
+  border: 1px solid var(--gold-dim);
+  padding: 0.3rem 0.8rem;
+  white-space: nowrap;
+}
+
+.layer-block { margin-bottom: 5rem; }
+
+/* ── READING CARD ── */
+.card {
+  background: var(--navy-card);
+  border: 1px solid rgba(230,193,110,0.08);
+  margin-bottom: 1.2rem;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.3s, transform 0.3s;
+  cursor: default;
+}
+.card::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(230,193,110,0.2), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.card:hover { border-color: rgba(230,193,110,0.2); transform: translateY(-1px); }
+.card:hover::after { opacity: 1; }
+
+.card-body { padding: 2rem 2.5rem; }
+
+.card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-bottom: 0.8rem;
+}
+
+.card-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.55rem;
+  letter-spacing: 0.2em;
+  color: var(--gold-dim);
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 0.4rem;
+}
+.card-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1rem, 2.5vw, 1.3rem);
+  font-weight: 400;
+  color: var(--silver-bright);
+  letter-spacing: 0.04em;
+  line-height: 1.3;
+}
+.bestseller {
+  display: inline-block;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.48rem;
+  letter-spacing: 0.2em;
+  color: var(--navy);
+  background: var(--gold);
+  padding: 0.15rem 0.6rem;
+  text-transform: uppercase;
+  margin-left: 0.8rem;
+  vertical-align: middle;
+}
+
+.card-price { text-align: right; flex-shrink: 0; }
+.price-usd {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.3rem;
+  color: var(--gold-bright);
+  display: block;
+  line-height: 1.2;
+}
+.price-idr {
+  font-size: 1rem;
+  color: var(--silver-dim);
+  font-style: italic;
+  display: block;
+}
+
+.card-poetic {
+  font-size: 0.95rem;
+  font-style: italic;
+  color: var(--silver-dim);
+  margin-bottom: 1rem;
+  font-weight: 300;
+  line-height: 1.7;
+}
+.card-desc {
+  font-size: 0.88rem;
+  color: var(--silver);
+  line-height: 1.85;
+  font-weight: 300;
+}
+
+/* ── SESSION PRICING ── */
+.session-pricing {
+  margin-top: 1.2rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.8rem;
+}
+.session-item {
+  background: var(--gold-glow);
+  border: 1px solid rgba(230,193,110,0.12);
+  padding: 0.8rem 1rem;
+}
+.session-label {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.55rem;
+  letter-spacing: 0.25em;
+  color: var(--gold-dim);
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 0.4rem;
+}
+.session-usd {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1rem;
+  color: var(--gold-bright);
+  display: block;
+}
+.session-idr {
+  font-size: 0.75rem;
+  color: var(--silver-ghost);
+  font-style: italic;
+}
+
+/* ── ADD-ON BANNER ── */
+.addon-banner {
+  background: var(--gold-glow);
+  border: 1px solid rgba(230,193,110,0.15);
+  border-left: 3px solid var(--gold-dim);
+  padding: 1.5rem 2rem;
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+.addon-icon { font-size: 1.5rem; flex-shrink: 0; color: var(--gold-dim); }
+.addon-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  color: var(--gold-bright);
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 0.3rem;
+}
+.addon-desc {
+  font-size: 0.85rem;
+  color: var(--silver-dim);
+  font-style: italic;
+  line-height: 1.6;
+}
+.addon-price { margin-left: auto; text-align: right; flex-shrink: 0; }
+.addon-usd {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem;
+  color: var(--gold-bright);
+  display: block;
+}
+.addon-idr {
+  font-size: 0.75rem;
+  color: var(--silver-ghost);
+  font-style: italic;
+}
+
+/* ── PDF INCLUDED ── */
+.pdf-included {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.5rem;
+  letter-spacing: 0.2em;
+  color: var(--gold-dim);
+  text-transform: uppercase;
+  border: 1px solid rgba(230,193,110,0.15);
+  padding: 0.2rem 0.6rem;
+  margin-top: 0.5rem;
+}
+
+
+
+/* ── SOCIAL ICONS ── */
+.footer-social {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.4rem;
+  margin-top: 1.8rem;
+}
+.social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border: 1px solid rgba(230,193,110,0.2);
+  color: var(--gold-dim);
+  text-decoration: none;
+  transition: border-color 0.25s, color 0.25s, transform 0.25s;
+}
+.social-link:hover {
+  border-color: var(--gold-bright);
+  color: var(--gold-bright);
+  transform: translateY(-2px);
+}
+.social-link svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
+
+/* ── ABOUT ── */
+.about-section {
+  padding: 5rem 0 4rem;
+  position: relative;
+  z-index: 2;
+  border-top: 1px solid var(--divider);
+}
+.about-inner {
+  max-width: 680px;
+  margin: 0 auto;
+  text-align: center;
+}
+.about-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.about-body p {
+  font-size: clamp(1rem, 2vw, 1.1rem);
+  color: var(--silver-dim);
+  line-height: 1.95;
+  font-weight: 300;
+  text-align: justify;
+}
+
+
+
+/* ── REVEAL ── */
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal.on { opacity: 1; transform: translateY(0); }
+
+/* ── FOOTER ── */
+.footer {
+  padding: 5rem 0 3rem;
+  text-align: center;
+  border-top: 1px solid var(--divider);
+  position: relative;
+  z-index: 2;
+}
+.footer-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.4rem;
+  color: var(--silver-bright);
+  letter-spacing: 0.1em;
+  margin-bottom: 0.4rem;
+}
+.footer-sub { font-style: italic; color: var(--gold-dim); font-size: 0.9rem; margin-bottom: 1.8rem; }
+.footer-promise {
+  font-size: 0.95rem;
+  font-style: italic;
+  color: var(--silver-ghost);
+  max-width: 380px;
+  margin: 0 auto 2rem;
+  line-height: 1.9;
+}
+.footer-copy {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.55rem;
+  letter-spacing: 0.18em;
+  color: rgba(230,193,110,0.2);
+  text-transform: uppercase;
+}
+
+/* ── TABLET ── */
+@media (max-width: 860px) {
+  .wrap { padding: 0 1.5rem; }
+  .card-body { padding: 1.8rem 2rem; }
+  .layer-block { margin-bottom: 3.5rem; }
+}
+
+/* ── MOBILE ── */
+@media (max-width: 640px) {
+  .hero { padding: 4rem 1.5rem 3rem; min-height: auto; }
+  .hero-rule::before, .hero-rule::after { width: 50px; }
+  .hero-badge { flex-wrap: wrap; justify-content: center; text-align: center; gap: 0.5rem; padding: 0.6rem 1rem; }
+  .hero-badge .dot { display: none; }
+  .hero-badge span { font-size: 0.72rem; }
+
+  .section { padding: 3rem 0; }
+  .about-section { padding: 3rem 0 2.5rem; }
+  .about-body p { font-size: 1rem; }
+  .sec-head { margin-bottom: 2.5rem; }
+
+  .layer-header { flex-wrap: wrap; gap: 0.8rem; padding-bottom: 1rem; margin-bottom: 1.5rem; }
+  .layer-num { font-size: 1.8rem; }
+  .layer-tag { margin-left: 0; }
+  .layer-block { margin-bottom: 3rem; }
+
+  .card-body { padding: 1.4rem 1.2rem; }
+  .card-top { flex-direction: column; gap: 0.3rem; }
+  .card-price { text-align: left; }
+  .card-title { font-size: 1rem; }
+  .price-usd { font-size: 1.1rem; }
+  .price-idr { font-size: 0.88rem; }
+
+  .session-pricing { grid-template-columns: 1fr; gap: 0.6rem; }
+  .session-item { padding: 0.7rem 0.9rem; }
+
+  .addon-banner { flex-wrap: wrap; gap: 1rem; padding: 1.2rem; }
+  .addon-price { margin-left: 0; text-align: left; }
+
+
+
+
+  .footer { padding: 3rem 0 2rem; }
+}
+
+@media (max-width: 380px) {
+  .hero-name { font-size: 2.4rem; }
+  .card-body { padding: 1.2rem 1rem; }
+}
+
+
+.footer-logo {
+  width: clamp(120px, 20vw, 180px);
+  height: auto;
+  margin-bottom: 0.8rem;
+  opacity: 0.85;
+  filter: brightness(1.05);
+}
+
+/* ── LOGO ── */
+.hero-logo {
+  width: clamp(220px, 40vw, 380px);
+  height: auto;
+  margin-bottom: 1.5rem;
+  opacity: 0;
+  animation: up 1s ease forwards 0.2s;
+  filter: brightness(1.05);
+}
+@media (max-width: 640px) {
+  .hero-logo { width: clamp(180px, 65vw, 280px); margin-bottom: 1rem; }
+}
+
+/* ── SELF-INTRODUCTION RITES FEATURE ── */
+.sir-feature-section { background: linear-gradient(180deg, transparent 0%, rgba(10,14,40,0.5) 100%); }
+
+.sir-invocation {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding: 0 1rem;
+}
+.sir-invocation p {
+  font-size: clamp(1rem, 2vw, 1.15rem);
+  font-style: italic;
+  color: var(--silver-dim);
+  line-height: 1.95;
+  font-weight: 300;
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+.sir-rites-preview {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  margin-bottom: 2.5rem;
+  border: 1px solid rgba(230,193,110,0.1);
+  background: rgba(230,193,110,0.08);
+}
+
+.sir-rite-card {
+  background: var(--navy-card);
+  position: relative;
+  transition: background 0.3s;
+}
+.sir-rite-card:hover { background: var(--navy-hover); }
+.sir-rite-card.sir-featured {
+  background: linear-gradient(160deg, #080e22 0%, #050517 100%);
+  border-top: 2px solid var(--gold-dim);
+}
+
+.sir-rite-inner { padding: 2rem 1.8rem 1.8rem; }
+
+.sir-most-sought {
+  display: block;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.48rem;
+  letter-spacing: 0.22em;
+  color: var(--navy);
+  background: var(--gold);
+  padding: 0.2rem 0.7rem;
+  text-transform: uppercase;
+  margin-bottom: 0.8rem;
+  width: fit-content;
+}
+
+.sir-spread {
+  display: block;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.52rem;
+  letter-spacing: 0.2em;
+  color: var(--gold-dim);
+  text-transform: uppercase;
+  margin-bottom: 0.7rem;
+}
+
+.sir-rite-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin-bottom: 0.8rem;
+}
+
+.sir-rite-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  font-weight: 500;
+  color: var(--silver-bright);
+  letter-spacing: 0.04em;
+}
+
+.sir-rite-price {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem;
+  color: var(--gold-bright);
+  flex-shrink: 0;
+}
+
+.sir-rite-desc {
+  font-size: 0.85rem;
+  font-style: italic;
+  color: var(--silver-dim);
+  line-height: 1.8;
+  font-weight: 300;
+}
+
+.sir-high-ticket {
+  background: var(--navy-card);
+  border: 1px solid rgba(230,193,110,0.15);
+  border-top: 2px solid var(--gold-dim);
+  padding: 2.5rem;
+  margin-bottom: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.sir-ht-eye {
+  display: block;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.52rem;
+  letter-spacing: 0.25em;
+  color: var(--gold-dim);
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.sir-ht-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+  font-weight: 400;
+  color: var(--silver-bright);
+  letter-spacing: 0.06em;
+  margin-bottom: 0.4rem;
+}
+
+.sir-ht-tag {
+  font-size: 0.88rem;
+  font-style: italic;
+  color: var(--silver-dim);
+  margin-bottom: 1rem;
+}
+
+.sir-systems {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.sir-system-tag {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.52rem;
+  letter-spacing: 0.18em;
+  color: var(--gold-dim);
+  text-transform: uppercase;
+  border: 1px solid rgba(230,193,110,0.2);
+  padding: 0.3rem 0.8rem;
+}
+
+.sir-ht-price-row {
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.sir-ht-usd {
+  display: block;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+  color: var(--gold-bright);
+  line-height: 1;
+  margin-bottom: 0.3rem;
+}
+
+.sir-ht-idr {
+  display: block;
+  font-size: 0.85rem;
+  font-style: italic;
+  color: var(--silver-ghost);
+}
+
+.sir-cta-wrap {
+  text-align: center;
+  padding: 1rem 0 2rem;
+}
+
+.sir-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.62rem;
+  letter-spacing: 0.28em;
+  color: var(--gold);
+  border: 1px solid rgba(230,193,110,0.35);
+  padding: 1rem 2.4rem;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: border-color 0.3s, color 0.3s, background 0.3s;
+}
+.sir-cta-btn:hover {
+  border-color: var(--gold-bright);
+  color: var(--gold-bright);
+  background: rgba(230,193,110,0.04);
+}
+.sir-cta-btn svg { transition: transform 0.3s; }
+.sir-cta-btn:hover svg { transform: translateX(4px); }
+
+@media (max-width: 640px) {
+  .sir-rites-preview { grid-template-columns: 1fr; }
+  .sir-rite-inner { padding: 1.5rem 1.2rem; }
+  .sir-high-ticket { flex-direction: column; padding: 1.8rem 1.2rem; }
+  .sir-ht-price-row { text-align: left; }
+}
+
+/* ── BOOK CTA ── */
+.book-cta-section {
+  position: relative;
+  z-index: 2;
+  padding: clamp(3rem, 6vw, 5rem) 0;
+  border-top: 1px solid var(--divider);
+  text-align: center;
+}
+.book-cta-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2rem;
+}
+.book-cta-note {
+  font-size: 0.88rem;
+  font-style: italic;
+  color: var(--silver-ghost);
+  letter-spacing: 0.04em;
+}
+.book-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.62rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  border: 1px solid rgba(230,193,110,0.35);
+  padding: 1rem 2.4rem;
+  text-decoration: none;
+  transition: border-color 0.3s, background 0.3s;
+}
+.book-cta-btn:hover {
+  border-color: rgba(230,193,110,0.7);
+  background: rgba(230,193,110,0.05);
+}
+.book-cta-btn svg { transition: transform 0.3s var(--ease-expo, cubic-bezier(0.16,1,0.3,1)); }
+.book-cta-btn:hover svg { transform: translateX(4px); }
+</style>
+</head>
+<body>
+
+<div class="starfield" id="sf"></div>
+
+<!-- HERO -->
+<section class="hero">
+  <p class="hero-eye">A reading space by Karsa Bintang</p>
+  <h1 class="hero-name">The Mind</h1>
+  <p class="hero-sub">Strategic readings for founders &amp; decision-makers</p>
+  <div class="hero-rule"><span>✦ ✦ ✦</span></div>
+  <p class="hero-tagline">Where will meets the will of the stars.</p>
+  <div class="hero-badge">
+    <span>Tarot</span>
+    <span class="dot"></span>
+    <span>Astrology</span>
+    <span class="dot"></span>
+    <span>Ba Zi</span>
+    <span class="dot"></span>
+    <span>I Ching</span>
+  </div>
+</section>
+
+
+<!-- ABOUT -->
+<section class="about-section">
+  <div class="wrap">
+    <div class="about-inner reveal">
+      <span class="sec-eye">About this space</span>
+      <h2 class="sec-title" style="margin-bottom:2rem">For those who know what they want — and need clarity on how to move.</h2>
+      <div class="about-body">
+        <p>Some questions are not about love or identity. They are about direction. About the venture that feels misaligned, the decision that keeps circling, the timing that refuses to become clear. These are the questions that live in the mind — and they deserve a practice that speaks their language.</p>
+        <p>The Mind is the strategic reading space of Karsa Bintang, built for founders, decision-makers, and those navigating professional crossroads. Every offering here draws on Tarot, Hellenistic Astrology, Ba Zi, and I Ching — not as prediction, but as a set of lenses that reveal what data and analysis alone cannot. The forces at work, the timing of the moment, the direction your energy is actually moving.</p>
+        <p>These are not readings for the curious. They are readings for the decided — for those who have already done the thinking and now need to see clearly.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OFFERINGS -->
+<section class="section">
+  <div class="wrap">
+
+    <div class="sec-head reveal">
+      <span class="sec-eye">The Complete Fee Schedule</span>
+      <h2 class="sec-title">All Offerings</h2>
+      <p class="sec-desc">Strategic readings for founders, decision-makers, and those navigating professional crossroads. Powered by Tarot, Astrology, Ba Zi, and I Ching.</p>
+      <div class="sec-line"></div>
+    </div>
+
+    <!-- ── TIER I — SEEKING CLARITY ── -->
+    <div class="layer-block reveal">
+      <div class="layer-header">
+        <span class="layer-num">I</span>
+        <div class="layer-info">
+          <span class="layer-name">SEEKING CLARITY</span>
+          <span class="layer-meaning"><i>I have a real situation I need to navigate.</i> In-depth PDF reports and live sessions.</span>
+        </div>
+        <span class="layer-tag">Risik Bintang</span>
+      </div>
+
+      <!-- 01. Business Clarity Session -->
+      <div class="card reveal">
+        <div class="card-body">
+          <div class="card-top">
+            <div class="card-left">
+              <span class="card-num">01 · Risik Bintang</span>
+              <h3 class="card-title">Business Clarity Session <span class="bestseller">New</span></h3>
+            </div>
+            <div class="card-price">
+              <span class="price-usd">$200</span>
+              <span class="price-idr">IDR 2.999k</span>
+            </div>
+          </div>
+          <p class="card-poetic">One session. One direction. No more circling the same decision.</p>
+          <p class="card-desc">A premium live consultation devoted entirely to one business decision, strategic crossroads, or venture question. Drawing on Tarot, Astrology, and I Ching in real time, this session is designed for founders and decision-makers who need clarity — not comfort. Includes a PDF summary delivered after the session, and one follow-up question within 48 hours. Available in 60-minute format via video call.</p>
+          <span class="pdf-included">✦ Live Session · PDF Summary Included</span>
+        </div>
+      </div>
+
+      <!-- 06. Business Outlook Reading -->
+      <div class="card reveal">
+        <div class="card-body">
+          <div class="card-top">
+            <div class="card-left">
+              <span class="card-num">02 · Risik Bintang</span>
+              <h3 class="card-title">Business Outlook Reading</h3>
+            </div>
+            <div class="card-price">
+              <span class="price-usd">$175</span>
+              <span class="price-idr">IDR 2.499k</span>
+            </div>
+          </div>
+          <p class="card-poetic">Your venture has a destiny. This reading maps it.</p>
+          <p class="card-desc">A divination-based and strategically grounded reading of your business or venture. This reading combines divinatory insight with structured guidance — unearthing the alignment of your business through Tarot, Astrology, and I Ching while grounding every insight in clear, actionable direction. For founders and decision-makers who know that the best decisions are made with every available intelligence.</p>
+          <span class="pdf-included">✦ PDF Report Included</span>
+        </div>
+      </div>
+
+      <!-- 07. Launch Reading -->
+      <div class="card reveal">
+        <div class="card-body">
+          <div class="card-top">
+            <div class="card-left">
+              <span class="card-num">03 · Risik Bintang</span>
+              <h3 class="card-title">Launch Reading <span class="bestseller">New</span></h3>
+            </div>
+            <div class="card-price">
+              <span class="price-usd">$135</span>
+              <span class="price-idr">IDR 1.999k</span>
+            </div>
+          </div>
+          <p class="card-poetic">The stars have timing. So does your launch.</p>
+          <p class="card-desc">A reading of the energetic conditions surrounding a specific launch — a product, a business, a campaign, or a new chapter. We examine astrological timing, the I Ching posture of the moment, and the Tarot field around your intention to determine where the wind is blowing and how to move with it. For anyone who wants to begin well, not just begin.</p>
+          <span class="pdf-included">✦ PDF Report Included</span>
+        </div>
+      </div>
+
+      <!-- 08. Monthly Energy Forecast -->
+      <div class="card reveal">
+        <div class="card-body">
+          <div class="card-top">
+            <div class="card-left">
+              <span class="card-num">04 · Risik Bintang</span>
+              <h3 class="card-title">Monthly Energy Forecast</h3>
+            </div>
+            <div class="card-price">
+              <span class="price-usd">$85</span>
+              <span class="price-idr">IDR 1.099k</span>
+            </div>
+          </div>
+          <p class="card-poetic">What the coming month holds — and what it needs from you.</p>
+          <p class="card-desc">A forward-looking reading for the month ahead. What energies are moving in, what is completing, which themes will demand your attention, and where your focus is best placed. Grounded in current astrological transits and Tarot, this forecast gives you a map of the month before it arrives — so you can meet it with intention rather than reaction.</p>
+          <span class="pdf-included">✦ PDF Report Included</span>
+        </div>
+      </div>
+
+      <!-- 09. Yearly Forecast -->
+      <div class="card reveal">
+        <div class="card-body">
+          <div class="card-top">
+            <div class="card-left">
+              <span class="card-num">05 · Risik Bintang</span>
+              <h3 class="card-title">Yearly Forecast</h3>
+            </div>
+            <div class="card-price">
+              <span class="price-usd">$120</span>
+              <span class="price-idr">IDR 1.699k</span>
+            </div>
+          </div>
+          <p class="card-poetic">A full year, read before it unfolds.</p>
+          <p class="card-desc">Based on your natal chart, current astrological transits, and Tarot, this forecast gives you a complete picture of the year ahead. What cycles are opening, what is closing out, which seasons will demand your full attention, and where your energy is best concentrated. A document to return to at each turning point of the year — not just once, but throughout.</p>
+          <span class="pdf-included">✦ PDF Report Included</span>
+        </div>
+      </div>
+
+      <!-- 10. Career Trajectory -->
+      <div class="card reveal">
+        <div class="card-body">
+          <div class="card-top">
+            <div class="card-left">
+              <span class="card-num">06 · Risik Bintang</span>
+              <h3 class="card-title">Career Trajectory Reading</h3>
+            </div>
+            <div class="card-price">
+              <span class="price-usd">$120</span>
+              <span class="price-idr">IDR 1.699k</span>
+            </div>
+          </div>
+          <p class="card-poetic">The calling beneath the career — what your work is truly asking you to become.</p>
+          <p class="card-desc">A reading of your professional chapter. We uncover the deeper current of where your work is heading and why — what is blocking your progress, what is opening ahead, what the stars say about your professional timing, and what this chapter of your career is truly asking of you. For those at a crossroads between what they do and what they are meant to do.</p>
+          <span class="pdf-included">✦ PDF Report Included</span>
+        </div>
+      </div>
+
+    <!-- ── TIER II — SEEKING SELF ── -->
+    <div class="layer-block reveal">
+      <div class="layer-header">
+        <span class="layer-num">II</span>
+        <div class="layer-info">
+          <span class="layer-name">SEEKING SELF</span>
+          <span class="layer-meaning"><i>I want to understand who I fundamentally am.</i> Comprehensive written monographs.</span>
+        </div>
+        <span class="layer-tag">Pustaka Karsa</span>
+      </div>
+
+      <!-- 13. Book of You — Western Astrology -->
+      <div class="card reveal">
+        <div class="card-body">
+          <div class="card-top">
+            <div class="card-left">
+              <span class="card-num">07 · Pustaka Karsa</span>
+              <h3 class="card-title">The Book of You — Western Astrology</h3>
+            </div>
+            <div class="card-price">
+              <span class="price-usd">$150</span>
+              <span class="price-idr">IDR 2.499k</span>
+            </div>
+          </div>
+          <p class="card-poetic">A sacred text, written about you, from the language of the sky.</p>
+          <p class="card-desc">A comprehensive written monograph of your natal chart read through the lens of Hellenistic Astrology. Every major placement is explored in depth — your Sun, Moon, Ascendant, planets in their houses and signs, sect, essential dignities, Hermetic Lots, angular patterns, and timing cycles. This is not a quick summary. This is a thick, carefully crafted document that you will return to for years. Delivered as a PDF report formatted for print. Requires birth date, time, and place.</p>
+          <span class="pdf-included">✦ Written Monograph · PDF Delivered</span>
+        </div>
+      </div>
+
+      <!-- 14. Book of You — Ba Zi -->
+      <div class="card reveal">
+        <div class="card-body">
+          <div class="card-top">
+            <div class="card-left">
+              <span class="card-num">08 · Pustaka Karsa</span>
+              <h3 class="card-title">The Book of You — Ba Zi (Four Pillars)</h3>
+            </div>
+            <div class="card-price">
+              <span class="price-usd">$150</span>
+              <span class="price-idr">IDR 2.499k</span>
+            </div>
+          </div>
+          <p class="card-poetic">Your destiny, written in the language of Heaven, Earth, and Time.</p>
+          <p class="card-desc">A full written monograph of your Ba Zi chart — the Four Pillars of Destiny as derived from your year, month, day, and hour of birth. Your Day Master, elemental profile, Ten Gods, Nobleman stars, and Luck Pillars are read together to reveal the architecture of your fate and the rhythm of your seasons. This is classical Chinese metaphysics translated into a living document about your life. Delivered as a PDF report formatted for print. Requires birth date, time, and place.</p>
+          <span class="pdf-included">✦ Written Monograph · PDF Delivered</span>
+        </div>
+      </div>
+
+      <!-- 15. Book of You — Tarot Soul Portrait -->
+      <div class="card reveal">
+        <div class="card-body">
+          <div class="card-top">
+            <div class="card-left">
+              <span class="card-num">09 · Pustaka Karsa</span>
+              <h3 class="card-title">The Book of You — Tarot Soul Portrait <span class="bestseller">New</span></h3>
+            </div>
+            <div class="card-price">
+              <span class="price-usd">$150</span>
+              <span class="price-idr">IDR 2.499k</span>
+            </div>
+          </div>
+          <p class="card-poetic">The Major Arcana has always known your name. This is the reading that says it aloud.</p>
+          <p class="card-desc">A written portrait of your soul as revealed through the Major Arcana — the 22 archetypal forces of the Tarot. Through a dedicated spread and deep symbolic reading, we identify the cards that are most alive in your current chapter: your core nature, your shadow, your gift, your wound, and the archetype you are being called to embody. Not a prediction. A mirror. Delivered as a beautifully formatted PDF monograph.</p>
+          <span class="pdf-included">✦ Written Monograph · PDF Delivered</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── TIER III — ONGOING PRESENCE ── -->
+    <div class="layer-block reveal">
+      <div class="layer-header">
+        <span class="layer-num">III</span>
+        <div class="layer-info">
+          <span class="layer-name">ONGOING PRESENCE</span>
+          <span class="layer-meaning"><i>I want Karsa Bintang in my corner, consistently.</i> Retainers, live consultations, mentorship.</span>
+        </div>
+        <span class="layer-tag">Tabula Karsa</span>
+      </div>
+
+      <!-- 16. Founder's Compass -->
+      <div class="card reveal">
+        <div class="card-body">
+          <div class="card-top">
+            <div class="card-left">
+              <span class="card-num">10 · Tabula Karsa</span>
+              <h3 class="card-title">Founder's Compass <span class="bestseller">New</span></h3>
+            </div>
+            <div class="card-price">
+              <span class="price-usd">$550</span>
+              <span class="price-idr">IDR 7.999k</span>
+            </div>
+          </div>
+          <p class="card-poetic">A strategic partner who reads both the market and the stars.</p>
+          <p class="card-desc">A three-month retainer for founders who want consistent cosmic and strategic counsel. Each month includes one live Business Clarity Session, unlimited async questions via direct message, and a monthly Business Outlook reading delivered as a PDF. For those who have come to understand that the clearest decisions are made at the intersection of intuition and intelligence — and who want that intersection available to them, consistently. Billed as a single 3-month engagement.</p>
+          <span class="pdf-included">✦ 3 Live Sessions · Monthly PDF Reports · Async Support</span>
+        </div>
+      </div>
+
+      <!-- 17. Monthly Guidance -->
+      <div class="card reveal">
+        <div class="card-body">
+          <div class="card-top">
+            <div class="card-left">
+              <span class="card-num">11 · Tabula Karsa</span>
+              <h3 class="card-title">Monthly Guidance</h3>
+            </div>
+          </div>
+          <p class="card-poetic">A consistent, trusted presence in your corner for every single month.</p>
+          <p class="card-desc">A recurring monthly reading that tracks the arc of your life across time. Each session draws on the previous month's reading, building a cumulative picture of your growth, your patterns, and your trajectory. For those who understand that the deepest insights come not from a single reading but from an ongoing conversation with the stars.</p>
+          <div class="session-pricing">
+            <div class="session-item">
+              <span class="session-label">Per Session</span>
+              <span class="session-usd">$120</span>
+              <span class="session-idr">IDR 1.499k</span>
+            </div>
+            <div class="session-item">
+              <span class="session-label">3-Month Retainer</span>
+              <span class="session-usd">$350 / 3 months</span>
+              <span class="session-idr">IDR 4.999k / 3 months</span>
+            </div>
+          </div>
+          <span class="pdf-included" style="margin-top:1rem">✦ PDF Report Included</span>
+        </div>
+      </div>
+
+      <!-- 18. Online Consultation -->
+      <div class="card reveal">
+        <div class="card-body">
+          <div class="card-top">
+            <div class="card-left">
+              <span class="card-num">12 · Tabula Karsa</span>
+              <h3 class="card-title">Online Consultation</h3>
+            </div>
+          </div>
+          <p class="card-poetic">A live session for those whose questions deserve to be spoken, not just answered.</p>
+          <p class="card-desc">A premium live consultation conducted via video call. This session is reserved for those who are ready to engage fully — to ask, respond, redirect, and go deeper in real time. Time is the most finite resource, and this offering reflects that. Booked only with those who come prepared and intentional. Available in 60-minute and 90-minute format.</p>
+          <div class="session-pricing">
+            <div class="session-item">
+              <span class="session-label">60 Minutes</span>
+              <span class="session-usd">$175</span>
+              <span class="session-idr">IDR 2.499k</span>
+            </div>
+            <div class="session-item">
+              <span class="session-label">90 Minutes</span>
+              <span class="session-usd">$250</span>
+              <span class="session-idr">IDR 3.599k</span>
+            </div>
+          </div>
+          <span class="pdf-included" style="margin-top:1rem">✦ PDF Report Included</span>
+        </div>
+      </div>
+
+      <!-- 19. Onsite Consultation -->
+      <div class="card reveal">
+        <div class="card-body">
+          <div class="card-top">
+            <div class="card-left">
+              <span class="card-num">13 · Tabula Karsa</span>
+              <h3 class="card-title">Onsite Consultation</h3>
+            </div>
+          </div>
+          <p class="card-poetic">The rarest offering. In the same room. Full presence.</p>
+          <p class="card-desc">An in-person consultation conducted in a private space in Indonesia. The most intimate and complete reading experience available. Presence changes everything — what can be felt in a room cannot be replicated through a screen. This offering is available only to those who understand the value of what they are asking for. Indonesia only. Available in 60-minute and 90-minute format.</p>
+          <div class="session-pricing">
+            <div class="session-item">
+              <span class="session-label">60 Minutes</span>
+              <span class="session-usd">$225</span>
+              <span class="session-idr">IDR 3.299k</span>
+            </div>
+            <div class="session-item">
+              <span class="session-label">90 Minutes</span>
+              <span class="session-usd">$325</span>
+              <span class="session-idr">IDR 4.799k</span>
+            </div>
+          </div>
+          <span class="pdf-included" style="margin-top:1rem">✦ PDF Report Included</span>
+        </div>
+      </div>
+
+      <!-- 20. Mentorship -->
+      <div class="card reveal">
+        <div class="card-body">
+          <div class="card-top">
+            <div class="card-left">
+              <span class="card-num">14 · Tabula Karsa</span>
+              <h3 class="card-title">Mentorship</h3>
+            </div>
+          </div>
+          <p class="card-poetic">For those not only seeking answers — but learning to read the stars themselves.</p>
+          <p class="card-desc">A structured mentorship for those who wish to develop their own divination practice under experienced guidance. Drawing on sixteen years of practice across Tarot, Hellenistic Astrology, Ba Zi, and I Ching, these sessions are designed to build genuine competence and intuition alongside technique. For the serious student who is ready to do the real work.</p>
+          <div class="session-pricing">
+            <div class="session-item">
+              <span class="session-label">Per Session</span>
+              <span class="session-usd">$250</span>
+              <span class="session-idr">IDR 3.299k</span>
+            </div>
+            <div class="session-item">
+              <span class="session-label">3-Month Retainer</span>
+              <span class="session-usd">$750 / 3 months</span>
+              <span class="session-idr">IDR 9.999k / 3 months</span>
+            </div>
+          </div>
+          <span class="pdf-included" style="margin-top:1rem">✦ Sessions Included</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ── BOOK A READING ── -->
+<div class="book-cta-section">
+  <div class="wrap">
+    <div class="book-cta-inner reveal">
+      <p class="book-cta-note">Ready to begin?</p>
+      <a href="index.html#booking-form" class="book-cta-btn">
+        Book a Reading
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+</div>
+
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="wrap">
+    <img src="https://i.imgur.com/fxNdma1.png" alt="Karsa Bintang" class="footer-logo">
+    <p class="footer-sub">The Will of the Stars</p>
+    <p class="footer-promise">Soothsayer of the mind, the heart, and the soul</p>
+    <p class="footer-copy">EST. 2020. All rights Reserved.</p>
+    <div class="footer-social">
+      <a href="https://twitter.com/karsabintang" target="_blank" rel="noopener" class="social-link" aria-label="Twitter">
+        <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.259 5.631 5.905-5.631zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+      </a>
+      <a href="https://instagram.com/karsabintang" target="_blank" rel="noopener" class="social-link" aria-label="Instagram">
+        <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+      </a>
+      <a href="/cdn-cgi/l/email-protection#99edf1fcf2f8ebeaf8fbf0f7edf8f7fed9fef4f8f0f5b7faf6f4" class="social-link" aria-label="Email">
+        <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+      </a>
+    </div>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+const sf = document.getElementById('sf');
+for (let i = 0; i < 140; i++) {
+  const s = document.createElement('div');
+  s.classList.add('star');
+  const sz = Math.random() * 1.8 + 0.4;
+  s.style.cssText = `width:${sz}px;height:${sz}px;left:${Math.random()*100}%;top:${Math.random()*100}%;--d:${Math.random()*4+2}s;--delay:-${Math.random()*6}s;--op:${Math.random()*0.35+0.05}`;
+  sf.appendChild(s);
+}
+
+const obs = new IntersectionObserver(entries => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('on'), i * 60);
+      obs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+
