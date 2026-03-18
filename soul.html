@@ -3,14 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Self-Introduction Rites — Karsa Bintang</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Cinzel:wght@400;500;600&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="karsa-bintang-icon.svg">
+<title>The Soul — Self-Introduction Rites · Karsa Bintang</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Cormorant:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Cinzel:wght@400;500;600&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
 <style>
   :root {
-    --void: #050810;
-    --navy: #080E1E;
-    --navy-mid: #0D1428;
-    --navy-light: #141E38;
+    --void: #110920;
+    --navy: #1a0f2e;
+    --navy-mid: #231540;
+    --navy-light: #2e1a52;
     --gold: #C9A96E;
     --gold-bright: #E0C08A;
     --gold-dim: #7A6040;
@@ -21,6 +22,20 @@
     --border: rgba(201, 169, 110, 0.18);
     --border-mid: rgba(201, 169, 110, 0.35);
     --border-bright: rgba(201, 169, 110, 0.6);
+  }
+
+
+  .starfield { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
+  .star {
+    position: absolute;
+    border-radius: 50%;
+    background: #c0a8e8;
+    animation: twinkle var(--d) ease-in-out infinite var(--delay);
+    opacity: 0;
+  }
+  @keyframes twinkle {
+    0%,100% { opacity: 0; }
+    50% { opacity: var(--op); }
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -42,9 +57,9 @@
     position: fixed;
     inset: 0;
     background:
-      radial-gradient(ellipse 80% 60% at 50% 0%, rgba(20, 30, 70, 0.8) 0%, transparent 70%),
-      radial-gradient(ellipse 60% 40% at 20% 80%, rgba(201, 169, 110, 0.04) 0%, transparent 60%),
-      radial-gradient(ellipse 40% 60% at 80% 30%, rgba(100, 120, 200, 0.05) 0%, transparent 60%);
+      radial-gradient(ellipse 80% 60% at 50% 0%, rgba(60, 20, 100, 0.7) 0%, transparent 70%),
+      radial-gradient(ellipse 60% 40% at 20% 80%, rgba(201, 169, 110, 0.05) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 60% at 80% 30%, rgba(140, 80, 220, 0.06) 0%, transparent 60%);
     pointer-events: none;
     z-index: 0;
   }
@@ -93,9 +108,9 @@
   }
 
   .brand-name {
-    font-family: 'Cinzel', serif;
-    font-size: 10px;
-    letter-spacing: 0.45em;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.58rem;
+    letter-spacing: 0.28em;
     color: var(--gold);
     text-transform: uppercase;
     margin-bottom: 20px;
@@ -103,13 +118,14 @@
   }
 
   .rite-title {
-    font-family: 'Cinzel', serif;
-    font-size: clamp(30px, 7vw, 44px);
-    font-weight: 500;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.2rem, 7vw, 4.5rem);
+    font-weight: 300;
+    font-style: italic;
     line-height: 1.12;
     color: var(--cream);
     margin-bottom: 16px;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.04em;
   }
 
   .rite-title em {
@@ -119,14 +135,17 @@
   }
 
   .rite-subtitle {
-    font-family: 'Cormorant', serif;
-    font-style: italic;
-    font-size: 17px;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: normal;
+    font-size: clamp(1rem, 2vw, 1.1rem);
     color: var(--mist);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
     line-height: 1.6;
     max-width: 420px;
     margin: 0 auto;
     font-weight: 300;
+    opacity: 0.8;
   }
 
   /* ── DIVIDER ── */
@@ -171,6 +190,59 @@
     margin: 0 auto;
   }
 
+
+  /* ── ABOUT ── */
+  .about-section {
+    padding: clamp(4rem, 8vw, 6rem) 24px clamp(3rem, 6vw, 5rem);
+    border-top: 1px solid var(--border);
+    position: relative;
+    z-index: 1;
+  }
+  .about-inner {
+    max-width: 580px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .about-eyebrow {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.58rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--gold);
+    display: block;
+    margin-bottom: 1.2rem;
+    opacity: 0.75;
+  }
+  .about-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--cream);
+    line-height: 1.35;
+    margin-bottom: clamp(1.5rem, 3vw, 2.2rem);
+    letter-spacing: 0.02em;
+  }
+  .about-rule {
+    width: 36px;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--gold-dim), transparent);
+    margin: 0 auto clamp(2rem, 4vw, 3rem);
+  }
+  .about-body {
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+    text-align: justify;
+  }
+  .about-body p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(0.95rem, 1.8vw, 1.05rem);
+    color: rgba(237, 232, 222, 0.55);
+    line-height: 1.95;
+    font-weight: 300;
+  }
+
   /* ── RITES ── */
   .rites {
     display: flex;
@@ -211,7 +283,7 @@
 
   .rite.featured {
     border-color: var(--border-mid);
-    background: linear-gradient(160deg, rgba(20, 30, 60, 0.6) 0%, rgba(10, 15, 35, 0.4) 100%);
+    background: linear-gradient(160deg, rgba(55, 25, 90, 0.6) 0%, rgba(17, 9, 32, 0.4) 100%);
   }
 
   .rite.featured::after {
@@ -321,7 +393,7 @@
     padding: 36px 32px;
     position: relative;
     text-align: center;
-    background: linear-gradient(160deg, rgba(20, 30, 60, 0.5) 0%, rgba(8, 14, 30, 0.8) 100%);
+    background: linear-gradient(160deg, rgba(50, 20, 80, 0.45) 0%, rgba(17, 9, 32, 0.8) 100%);
     animation: ascend 1.6s cubic-bezier(0.16, 1, 0.3, 1) 0.95s forwards;
     opacity: 0;
     overflow: hidden;
@@ -583,7 +655,7 @@
     align-items: center;
     justify-content: space-between;
     padding: 18px 32px;
-    background: linear-gradient(180deg, rgba(5,8,16,0.95) 0%, rgba(5,8,16,0.0) 100%);
+    background: linear-gradient(180deg, rgba(17,9,32,0.97) 0%, rgba(17,9,32,0.0) 100%);
     backdrop-filter: blur(2px);
     pointer-events: none;
   }
@@ -650,6 +722,8 @@
 </head>
 <body>
 
+<div class="starfield" id="sf"></div>
+
 <!-- BACK NAVIGATION -->
 <nav class="back-nav">
   <a href="index.html" class="back-link">
@@ -682,6 +756,21 @@
     You come here to meet yourself at last, finally, for the first time ever.<br>
     Each rite is a ritual. A passage. And what you find on the other side is all yours.</p>
   </div>
+
+
+  <!-- ABOUT -->
+  <section class="about-section">
+    <div class="about-inner">
+      <span class="about-eyebrow">About this space</span>
+      <h2 class="about-title">A ceremonial encounter with the self you have always been.</h2>
+      <div class="about-rule"></div>
+      <div class="about-body">
+        <p>There are questions that cannot be answered by strategy or by love. They are questions about the self — about what you are made of at the deepest level, what patterns have governed your life without your full awareness, and what you are being called to become in this chapter.</p>
+        <p>The Self-Introduction Rites exist for those who are ready to stop circling the edges of themselves and step inside. These are not readings. They are encounters. Each rite is a structured ritual of deep cartomantic practice — drawing on the full power of the Tarot to hold up a mirror that does not flatter, does not deceive, and does not look away.</p>
+        <p>You come here not to have fun, nor to satiate your curiosity. You come here to meet yourself at last, finally, for the first time ever.</p>
+      </div>
+    </div>
+  </section>
 
   <!-- RITES -->
   <div class="rites">
@@ -740,15 +829,15 @@
     <div class="high-ticket-systems">
       <span class="system-tag">Ba Zi</span>
       <span class="system-tag">Western Astrology</span>
-      <span class="system-tag">Human Design</span>
-      <span class="system-tag">Destiny Matrix</span>
+      <span class="system-tag">Ba Zi</span>
+      <span class="system-tag">Tarot</span>
     </div>
 
     <p class="ht-description">
       You have always sensed that you are more than what any single system could contain.
       More than your sun sign. More than your type. More than the story you inherited.<br><br>
       This container exists for the one who is ready to stop circling the edges of themselves and finally step inside.<br><br>
-      Across four sessions, we draw from Ba Zi, Western Astrology, Human Design, and Destiny Matrix
+      Across four sessions, we draw from Ba Zi, Western Astrology, Tarot, and I Ching
       to build a living portrait of who you are, how you move, what holds you back, and where you
       are being called. Not as separate readings as one unified revelation.
     </p>
@@ -793,17 +882,30 @@
 
   <!-- CTA -->
   <div class="cta-wrap">
-    <p class="cta-note">Sessions conducted via video call and onsite (Indonesia only).<br>
-    Written reports delivered within 72 hours.</p>
-    <a href="https://docs.google.com/forms/d/e/1FAIpQLScA9kc-Z0t4C-VY8_OKKBPb-ka310xiMEubBHhhwIGO8egAVA/viewform?usp=header" class="cta-btn">Enter the Rite</a>
+    <p class="cta-note">Sessions conducted via video call and onsite (Indonesia only).<br>Written reports delivered within 72 hours.<br>Payment link sent upon confirmation.</p>
+    <a href="index.html#booking-form" class="cta-btn">Enter the Rite</a>
   </div>
 
   <!-- FOOTER -->
   <div class="footer">
     <p class="footer-note">Jakarta, Indonesia</p>
-    <div class="footer-brand">Karsa Bintang · Est. 2009</div>
+    <div class="footer-brand">Karsa Bintang · Est. 2020</div>
   </div>
 
 </div>
+
+<script>
+const sf = document.getElementById('sf');
+if (sf) {
+  for (let i = 0; i < 100; i++) {
+    const s = document.createElement('div');
+    s.classList.add('star');
+    const sz = Math.random() * 1.6 + 0.3;
+    s.style.cssText = `width:${sz}px;height:${sz}px;left:${Math.random()*100}%;top:${Math.random()*100}%;--d:${Math.random()*5+2}s;--delay:-${Math.random()*7}s;--op:${Math.random()*0.2+0.04}`;
+    sf.appendChild(s);
+  }
+}
+</script>
+
 </body>
 </html>
