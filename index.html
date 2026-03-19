@@ -22,7 +22,7 @@ html { scroll-behavior: smooth; height: 100%; }
   --mind-accent-bright: #f0d484;
   --mind-text: #ccd8f0;
   --mind-text-dim: #7090b8;
- 
+
   /* Heart — rose / plum */
   --heart-bg: #120710;
   --heart-card: #1e0d18;
@@ -31,7 +31,7 @@ html { scroll-behavior: smooth; height: 100%; }
   --heart-accent-bright: #e88099;
   --heart-text: #e8c4ce;
   --heart-text-dim: #9a7080;
- 
+
   /* Soul — silver / deep indigo */
   --soul-bg: #1a0f2e;
   --soul-card: #231540;
@@ -41,7 +41,7 @@ html { scroll-behavior: smooth; height: 100%; }
   --soul-text: #e0d8f0;
   --soul-text-dim: #8a7898;
 }
- 
+
 body {
   background: #02020D;
   color: #dde4f0;
@@ -49,7 +49,7 @@ body {
   overflow-x: hidden;
   cursor: default;
 }
- 
+
 /* ── NOISE OVERLAY ── */
 body::before {
   content: '';
@@ -59,7 +59,7 @@ body::before {
   pointer-events: none;
   z-index: 100;
 }
- 
+
 /* ── STARFIELD ── */
 .starfield {
   position: fixed;
@@ -77,7 +77,7 @@ body::before {
   0%, 100% { opacity: 0; }
   50% { opacity: var(--op); }
 }
- 
+
 /* ── HERO ── */
 .hero {
   position: relative;
@@ -91,7 +91,7 @@ body::before {
   text-align: center;
   padding: clamp(3rem, 8vw, 6rem) 2rem;
 }
- 
+
 .hero-eyebrow {
   font-size: clamp(0.5rem, 1vw, 0.62rem);
   letter-spacing: 0.28em;
@@ -101,7 +101,7 @@ body::before {
   opacity: 0;
   animation: rise 1.2s var(--ease-expo) forwards 0.3s;
 }
- 
+
 .hero-logo {
   width: clamp(200px, 36vw, 420px);
   height: auto;
@@ -110,7 +110,7 @@ body::before {
   opacity: 0;
   animation: rise 1.4s var(--ease-expo) forwards 0.5s;
 }
- 
+
 .hero-rule {
   display: flex;
   align-items: center;
@@ -127,7 +127,7 @@ body::before {
 }
 .hero-rule::after { background: linear-gradient(to left, transparent, #c9a254); }
 .hero-rule span { color: #c9a254; font-size: 0.65rem; letter-spacing: 0.2em; }
- 
+
 .hero-tagline {
   font-size: clamp(1rem, 2.5vw, 1.35rem);
   font-style: italic;
@@ -139,7 +139,7 @@ body::before {
   opacity: 0;
   animation: rise 1.2s var(--ease-expo) forwards 1.05s;
 }
- 
+
 /* Scroll indicator */
 .scroll-hint {
   position: absolute;
@@ -171,12 +171,12 @@ body::before {
   51% { transform: scaleY(1); transform-origin: bottom; opacity: 1; }
   100% { transform: scaleY(0); transform-origin: bottom; opacity: 0; }
 }
- 
+
 @keyframes rise {
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
 }
- 
+
 /* ── THREE DOORS ── */
 .doors-section {
   position: relative;
@@ -186,7 +186,7 @@ body::before {
   grid-template-columns: 1fr 1fr 1.3fr;
   transition: grid-template-columns 0.7s var(--ease-expo);
 }
- 
+
 /* Each door */
 .door {
   position: relative;
@@ -204,12 +204,12 @@ body::before {
   text-decoration: none;
 }
 .door:last-child { border-right: none; }
- 
+
 /* Door backgrounds */
 .door--mind { background: var(--mind-bg); }
 .door--heart { background: var(--heart-bg); }
 .door--soul { background: var(--soul-bg); }
- 
+
 /* Hover darkening overlay */
 .door::before {
   content: '';
@@ -224,7 +224,7 @@ body::before {
 .door--heart::before { background: radial-gradient(ellipse at 50% 80%, rgba(212,96,122,0.08) 0%, transparent 70%); }
 .door--soul::before { background: radial-gradient(ellipse at 50% 80%, rgba(180,140,255,0.07) 0%, transparent 70%); }
 .door:hover::before { opacity: 1; }
- 
+
 /* Vertical divider line accent */
 .door::after {
   content: '';
@@ -236,7 +236,7 @@ body::before {
   background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.06), transparent);
 }
 .door:last-child::after { display: none; }
- 
+
 /* Floating particles per door */
 .door-particles {
   position: absolute;
@@ -253,7 +253,7 @@ body::before {
   0% { transform: translateY(0) translateX(0); opacity: var(--pop); }
   100% { transform: translateY(var(--py)) translateX(var(--px)); opacity: calc(var(--pop) * 0.4); }
 }
- 
+
 /* Door content */
 .door-content {
   position: relative;
@@ -262,7 +262,7 @@ body::before {
   flex-direction: column;
   gap: clamp(0.6rem, 1.5vw, 1rem);
 }
- 
+
 .door-numeral {
   font-size: clamp(0.5rem, 0.9vw, 0.6rem);
   letter-spacing: 0.3em;
@@ -273,7 +273,7 @@ body::before {
 .door--mind .door-numeral { color: var(--mind-accent-dim); }
 .door--heart .door-numeral { color: var(--heart-accent-dim); }
 .door--soul .door-numeral { color: var(--soul-accent-dim); }
- 
+
 .door-name {
   font-size: clamp(2.2rem, 4.5vw, 4.8rem);
   font-weight: 300;
@@ -285,7 +285,7 @@ body::before {
 .door--mind .door-name { color: var(--mind-accent); }
 .door--heart .door-name { color: var(--heart-accent); }
 .door--soul .door-name { color: var(--soul-accent); }
- 
+
 .door-descriptor {
   font-size: clamp(0.78rem, 1.2vw, 0.9rem);
   font-style: italic;
@@ -297,7 +297,7 @@ body::before {
 .door--mind .door-descriptor { color: var(--mind-text-dim); }
 .door--heart .door-descriptor { color: var(--heart-text-dim); }
 .door--soul .door-descriptor { color: var(--soul-text-dim); }
- 
+
 /* Offerings list — hidden until hover */
 .door-offerings {
   display: flex;
@@ -312,7 +312,7 @@ body::before {
 .door-offerings-inner { overflow: hidden; }
 .door:hover .door-offerings,
 .door:focus .door-offerings { grid-template-rows: 1fr; }
- 
+
 .door-offering-item {
   font-size: clamp(0.7rem, 1vw, 0.78rem);
   letter-spacing: 0.08em;
@@ -327,12 +327,12 @@ body::before {
 .door--mind .door-offering-item { color: var(--mind-text-dim); }
 .door--heart .door-offering-item { color: var(--heart-text-dim); }
 .door--soul .door-offering-item { color: var(--soul-text-dim); }
- 
+
 .door:hover .door-offering-item:nth-child(1) { opacity: 1; transform: translateY(0); transition-delay: 0.08s; }
 .door:hover .door-offering-item:nth-child(2) { opacity: 1; transform: translateY(0); transition-delay: 0.16s; }
 .door:hover .door-offering-item:nth-child(3) { opacity: 1; transform: translateY(0); transition-delay: 0.24s; }
 .door:hover .door-offering-item:nth-child(4) { opacity: 1; transform: translateY(0); transition-delay: 0.32s; }
- 
+
 /* CTA — slides up on hover */
 .door-cta {
   display: inline-flex;
@@ -356,15 +356,15 @@ body::before {
 .door--mind .door-cta { color: var(--mind-accent); border-color: rgba(230,193,110,0.25); }
 .door--heart .door-cta { color: var(--heart-accent); border-color: rgba(212,96,122,0.25); }
 .door--soul .door-cta { color: var(--soul-accent); border-color: rgba(201,162,84,0.25); }
- 
+
 .door:hover .door-cta { opacity: 1; transform: translateY(0); }
 .door--mind .door-cta:hover { background: rgba(230,193,110,0.06); border-color: rgba(230,193,110,0.5); }
 .door--heart .door-cta:hover { background: rgba(212,96,122,0.06); border-color: rgba(212,96,122,0.5); }
 .door--soul .door-cta:hover { background: rgba(201,162,84,0.06); border-color: rgba(201,162,84,0.5); }
- 
+
 .door-cta svg { transition: transform 0.3s var(--ease-expo); }
 .door-cta:hover svg { transform: translateX(4px); }
- 
+
 /* Top-right number — large decorative */
 .door-large-num {
   position: absolute;
@@ -384,7 +384,7 @@ body::before {
 .door--heart .door-large-num { color: var(--heart-accent); }
 .door--soul .door-large-num { color: var(--soul-accent); }
 .door:hover .door-large-num { opacity: 0.07; }
- 
+
 /* Entrance animation for doors section */
 .door {
   opacity: 0;
@@ -398,7 +398,7 @@ body::before {
 .door:nth-child(1) { transition-delay: 0s; }
 .door:nth-child(2) { transition-delay: 0.1s; }
 .door:nth-child(3) { transition-delay: 0.2s; }
- 
+
 /* ── FOOTER ── */
 .footer {
   position: relative;
@@ -447,7 +447,7 @@ body::before {
   color: rgba(230,193,110,0.15);
   text-transform: uppercase;
 }
- 
+
 /* ── MOBILE ── */
 @media (max-width: 768px) {
   .doors-section {
@@ -469,11 +469,11 @@ body::before {
   .door-cta { opacity: 1; transform: translateY(0); }
   .door-large-num { font-size: clamp(5rem, 20vw, 10rem); opacity: 0.05; }
 }
- 
+
 @media (max-width: 480px) {
   .door { padding: 2rem 1.5rem; }
 }
- 
+
 /* ── ABOUT ── */
 .about-section {
   position: relative;
@@ -523,7 +523,7 @@ body::before {
 .about-section.visible .about-rule,
 .about-section.visible .about-body,
 .about-section.visible .about-credential { opacity: 1; transform: translateY(0); }
- 
+
 /* ── TIER I ENTRY SECTION ── */
 .tier1-section {
   position: relative;
@@ -702,12 +702,12 @@ body::before {
 }
 .tier1-scroll-btn svg { transition: transform 0.3s var(--ease-expo); }
 .tier1-scroll-btn:hover svg { transform: translateY(3px); }
- 
+
 @media (max-width: 600px) {
   .tier1-grid { grid-template-columns: 1fr; }
   .tier1-addon { flex-wrap: wrap; }
 }
- 
+
 /* ── BOOKING FORM ── */
 .booking-section {
   position: relative;
@@ -756,7 +756,7 @@ body::before {
   background: linear-gradient(to right, transparent, #c9a254, transparent);
   margin: 1.5rem auto 0;
 }
- 
+
 /* Form shell */
 .form-shell {
   background: #06061a;
@@ -775,7 +775,7 @@ body::before {
   height: 1px;
   background: linear-gradient(to right, transparent, #c9a254, transparent);
 }
- 
+
 /* Form group titles */
 .form-group-label {
   font-size: 0.52rem;
@@ -787,7 +787,7 @@ body::before {
   padding-bottom: 0.6rem;
   border-bottom: 1px solid rgba(230,193,110,0.08);
 }
- 
+
 /* Grid */
 .form-row {
   display: grid;
@@ -797,7 +797,7 @@ body::before {
 }
 .form-row.single { grid-template-columns: 1fr; }
 .form-row.triple { grid-template-columns: 1fr 1fr 1fr; }
- 
+
 /* Fields */
 .f-field { display: flex; flex-direction: column; gap: 0.4rem; }
 .f-field.span-2 { grid-column: 1 / -1; }
@@ -843,13 +843,13 @@ body::before {
 .f-field select option { background: #06061a; color: #c4d0e8; }
 .f-field select optgroup { background: #06061a; color: #c9a254; }
 .f-field textarea { resize: vertical; min-height: 90px; line-height: 1.6; }
- 
+
 .form-sep {
   margin: 2rem 0;
   border: none;
   border-top: 1px solid rgba(230,193,110,0.06);
 }
- 
+
 /* Submit row */
 .submit-row {
   display: flex;
@@ -880,7 +880,7 @@ body::before {
   flex-shrink: 0;
 }
 .submit-btn:hover { background: #e6c16e; transform: translateY(-1px); }
- 
+
 /* Success state */
 #success-msg {
   display: none;
@@ -919,7 +919,7 @@ body::before {
   transition: background 0.25s;
 }
 .wa-btn:hover { background: #e6c16e; }
- 
+
 @media (max-width: 640px) {
   .form-row { grid-template-columns: 1fr; }
   .form-row.triple { grid-template-columns: 1fr; }
@@ -928,6 +928,59 @@ body::before {
   .submit-btn, .wa-btn { width: 100%; text-align: center; justify-content: center; }
   .submit-note { max-width: 100%; }
   .form-shell { padding: 1.5rem 1.2rem; }
+}
+.footer-logo {
+  width: clamp(120px, 20vw, 180px);
+  height: auto;
+  margin-bottom: 0.8rem;
+  opacity: 0.85;
+  filter: brightness(1.05);
+}
+
+.footer-sub { font-style: italic; color: #c9a254; font-size: 0.9rem; margin-bottom: 0.6rem; }
+.footer-promise { font-style: italic; color: #4a5a78; font-size: 0.88rem; margin-bottom: 1.2rem; line-height: 1.7; }
+
+/* ── FOOTER OVERRIDE ── */
+.footer {
+  padding: 7rem 0 5rem;
+  text-align: center;
+  border-top: 1px solid rgba(230,193,110,0.08);
+  position: relative;
+  z-index: 2;
+}
+.footer-logo {
+  width: clamp(120px, 20vw, 180px);
+  height: auto;
+  margin-bottom: 1.8rem;
+  opacity: 0.85;
+  filter: brightness(1.05);
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.footer-sub {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  color: #c9a254;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+.footer-promise {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.05rem;
+  font-style: italic;
+  color: #4a5a78;
+  max-width: 380px;
+  margin: 0 auto 2.5rem;
+  line-height: 1.9;
+}
+.footer-copy {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.55rem;
+  letter-spacing: 0.18em;
+  color: rgba(230,193,110,0.2);
+  text-transform: uppercase;
+  margin-bottom: 2rem;
 }
 </style>
 </head>
@@ -1100,9 +1153,9 @@ body::before {
       <p class="door-descriptor">A ceremonial encounter with the self you have always been. For those ready to be fully witnessed.</p>
       <div class="door-offerings">
         <div class="door-offerings-inner">
-          <p class="door-offering-item">✦ The Initiate</p>
-          <p class="door-offering-item">✦ The Savant</p>
-          <p class="door-offering-item">✦ The Sage</p>
+          <p class="door-offering-item">✦ The Initiate — $222</p>
+          <p class="door-offering-item">✦ The Savant — $333</p>
+          <p class="door-offering-item">✦ The Sage — $444</p>
           <p class="door-offering-item">✦ Know Your Living Soul</p>
         </div>
       </div>
@@ -1122,9 +1175,9 @@ body::before {
     <h2 class="about-title">A map without direction<br>is just a sheet of paper.</h2>
     <div class="about-rule"></div>
     <div class="about-body">
-      <p>Most people do not come here because things are going well. They come because something is unclear, be it a decision that keeps circling, a chapter that feels stuck, a path that once felt obvious and no longer does. They come because they have tried thinking their way through it, and thinking alone has not been enough.</p>
-      <p>Karsa Bintang was built at the intersection of structure and intuition, rigour and symbol, the ancient and the strategic. It began as a practice that grew quietly for sixteen years before it was made professional. It was deepened through an architecture education that taught how to read systems and hold complexity. It was sharpened through a business school education completed with honours, where the language of strategy became as familiar as the language of symbol.</p>
-      <p>The result is a practice that does not choose between rigour and intuition, because the most precise readings have always required both. Every session is designed to be returned to. Every insight is meant to move you, not just comfort you.</p>
+      <p>Most people do not come here because things are going well. They come because something is unclear — a decision that keeps circling, a chapter that feels stuck, a path that once felt obvious and no longer does. They come because they have tried thinking their way through it, and thinking alone has not been enough.</p>
+      <p>Karsa Bintang was built at the intersection of structure and intuition, rigour and symbol, the ancient and the strategic. It began at twelve — a practice that grew quietly for sixteen years before it was made professional. It was deepened through an architecture education that taught how to read systems and hold complexity. It was sharpened through a business school education completed with honours, where the language of strategy became as familiar as the language of symbol.</p>
+      <p>The result is a practice that does not choose between rigour and intuition — because the most precise readings have always required both. Every session is designed to be returned to. Every insight is meant to move you, not just comfort you.</p>
     </div>
     <div class="about-credential">
       <span>16+ Years of Practice</span>
@@ -1132,6 +1185,7 @@ body::before {
       <span>Hellenistic Astrology</span>
       <span>Ba Zi</span>
       <span>I Ching</span>
+      <span>Business School Honours</span>
     </div>
   </div>
 </section>
@@ -1187,51 +1241,51 @@ body::before {
           <select id="f-package">
             <option value="" disabled selected>Select a reading</option>
             <optgroup label="── Entry Readings (All Paths)">
-              <option>Mini Reading</option>
-              <option>Current State Reading</option>
-              <option>Yes / No + Timing</option>
-              <option>I Ching Oracle</option>
+              <option>Mini Reading — $35</option>
+              <option>Current State Reading — $75</option>
+              <option>Yes / No + Timing — $55</option>
+              <option>I Ching Oracle — $75</option>
             </optgroup>
             <optgroup label="── The Mind · Strategic Readings">
-              <option>01 · Business Clarity Session</option>
-              <option>02 · Business Outlook Reading</option>
-              <option>03 · Launch Reading</option>
-              <option>04 · Monthly Energy Forecast</option>
-              <option>05 · Yearly Forecast</option>
-              <option>06 · Career Trajectory Reading</option>
-              <option>07 · The Book of You — Western Astrology</option>
-              <option>08 · The Book of You — Ba Zi</option>
-              <option>09 · The Book of You — Tarot Soul Portrait</option>
-              <option>10 · Founder's Compass (3-month retainer)</option>
-              <option>11 · Monthly Guidance (per session)</option>
-              <option>11 · Monthly Guidance (3-month retainer)</option>
-              <option>12 · Online Consultation — 60 min</option>
-              <option>12 · Online Consultation — 90 min</option>
-              <option>13 · Onsite Consultation — 60 min</option>
-              <option>13 · Onsite Consultation — 90 min</option>
-              <option>14 · Mentorship (per session)0</option>
-              <option>14 · Mentorship (3-month retainer)</option>
+              <option>01 · Business Clarity Session — $200</option>
+              <option>02 · Business Outlook Reading — $175</option>
+              <option>03 · Launch Reading — $135</option>
+              <option>04 · Monthly Energy Forecast — $85</option>
+              <option>05 · Yearly Forecast — $120</option>
+              <option>06 · Career Trajectory Reading — $120</option>
+              <option>07 · The Book of You — Western Astrology — $150</option>
+              <option>08 · The Book of You — Ba Zi — $150</option>
+              <option>09 · The Book of You — Tarot Soul Portrait — $150</option>
+              <option>10 · Founder's Compass (3-month retainer) — $550</option>
+              <option>11 · Monthly Guidance (per session) — $120</option>
+              <option>11 · Monthly Guidance (3-month retainer) — $350</option>
+              <option>12 · Online Consultation — 60 min — $175</option>
+              <option>12 · Online Consultation — 90 min — $250</option>
+              <option>13 · Onsite Consultation — 60 min — $225</option>
+              <option>13 · Onsite Consultation — 90 min — $325</option>
+              <option>14 · Mentorship (per session) — $250</option>
+              <option>14 · Mentorship (3-month retainer) — $750</option>
             </optgroup>
             <optgroup label="── The Heart · Love Readings">
               <option>Will We? — $35</option>
-              <option>What Do They Think of Me?</option>
-              <option>Love Timing Reading</option>
-              <option>The Relationship Reading</option>
-              <option>The Soulmate Reading</option>
-              <option>Compatibility Reading</option>
-              <option>Are We Over?</option>
-              <option>Past Life Connection</option>
-              <option>Your Love Blueprint</option>
-              <option>Healing the Heart Reading</option>
-              <option>Channeled Letter for the Beloved</option>
-              <option>Channeled Poem for the Beloved</option>
+              <option>What Do They Think of Me? — $95</option>
+              <option>Love Timing Reading — $85</option>
+              <option>The Relationship Reading — $110</option>
+              <option>The Soulmate Reading — $120</option>
+              <option>Compatibility Reading — $130</option>
+              <option>Are We Over? — $95</option>
+              <option>Past Life Connection — $110</option>
+              <option>Your Love Blueprint — $120</option>
+              <option>Healing the Heart Reading — $95</option>
+              <option>Channeled Letter for the Beloved — $55</option>
+              <option>Channeled Poem for the Beloved — $45</option>
               <option>Gift Reading — $75</option>
             </optgroup>
             <optgroup label="── The Soul · Self-Introduction Rites">
-              <option>The Initiate </option>
-              <option>The Savant</option>
-              <option>The Sage</option>
-              <option>Know Your Living Soul</option>
+              <option>The Initiate — $222</option>
+              <option>The Savant — $333</option>
+              <option>The Sage — $444</option>
+              <option>Know Your Living Soul — $1,997</option>
             </optgroup>
           </select>
         </div>
@@ -1266,7 +1320,7 @@ body::before {
       <!-- SUCCESS STATE -->
       <div id="success-msg">
         <span class="success-mark">✦ Request Received</span>
-        <p class="success-body">Your reading is being processed. We will review your request and reach out within 48 hours with confirmation and a payment link — via WhatsApp or email. No payment is required until your booking is confirmed.</p>
+        <p class="success-body">Your reading is being held for you. We will review your request and reach out within 48 hours with confirmation and a payment link — via WhatsApp or email. No payment is required until your booking is confirmed.</p>
         <button class="wa-btn" id="wa-btn">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
           Continue on WhatsApp
@@ -1284,17 +1338,20 @@ body::before {
 
 <!-- ── FOOTER ── -->
 <footer class="footer">
-  <img src="https://i.imgur.com/fxNdma1.png" alt="Karsa Bintang" class="footer-logo">
-  <p class="footer-tagline">Soothsayer of the mind, the heart, and the soul.<br>Est. 2020 · 16+ Years of Practice</p>
-  <div class="footer-social">
-    <a href="https://twitter.com/karsabintang" target="_blank" rel="noopener" class="social-link" aria-label="Twitter">
-      <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.259 5.631 5.905-5.631zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-    </a>
-    <a href="https://instagram.com/karsa.bintang" target="_blank" rel="noopener" class="social-link" aria-label="Instagram">
-      <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
-    </a>
+  <div class="wrap">
+    <img src="https://i.imgur.com/fxNdma1.png" alt="Karsa Bintang" class="footer-logo">
+    <p class="footer-sub">Where will meets the will of the stars.</p>
+    <p class="footer-promise">Soothsayer of the mind, the heart, and the soul.</p>
+    <p class="footer-copy">EST. 2020. All rights reserved.</p>
+    <div class="footer-social">
+      <a href="https://twitter.com/karsabintang" target="_blank" rel="noopener" class="social-link" aria-label="Twitter">
+        <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.259 5.631 5.905-5.631zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+      </a>
+      <a href="https://instagram.com/karsabintang" target="_blank" rel="noopener" class="social-link" aria-label="Instagram">
+        <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+      </a>
+    </div>
   </div>
-  <p class="footer-copy">All rights reserved.</p>
 </footer>
 
 <script>
