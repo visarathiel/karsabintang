@@ -8,109 +8,69 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; height: 100%; }
+html { scroll-behavior: smooth; }
 
 :root {
   --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-quart: cubic-bezier(0.25, 1, 0.5, 1);
-
-  /* Mind — gold / navy */
-  --mind-bg: #0a1628;
-  --mind-card: #0f1f38;
-  --mind-accent: #e6c16e;
-  --mind-accent-dim: #c9a254;
-  --mind-accent-bright: #f0d484;
-  --mind-text: #ccd8f0;
-  --mind-text-dim: #7090b8;
-
-  /* Heart — rose / plum */
-  --heart-bg: #120710;
-  --heart-card: #1e0d18;
-  --heart-accent: #d4607a;
-  --heart-accent-dim: #b04d65;
-  --heart-accent-bright: #e88099;
-  --heart-text: #e8c4ce;
-  --heart-text-dim: #9a7080;
-
-  /* Soul — silver / deep indigo */
-  --soul-bg: #1a0f2e;
-  --soul-card: #231540;
-  --soul-accent: #c9a254;
-  --soul-accent-dim: #a8842e;
-  --soul-accent-bright: #e6c16e;
-  --soul-text: #e0d8f0;
-  --soul-text-dim: #8a7898;
+  --gold: #b8892a;
+  --gold-light: #d4a84b;
+  --gold-pale: #f5edd8;
+  --gold-rule: rgba(184,137,42,0.2);
+  --ink: #111008;
+  --ink-mid: #2a2218;
+  --ink-dim: #4a4030;
+  --ink-faint: #7a6e5a;
+  --bg: #faf8f4;
+  --bg-warm: #f4f0e8;
+  --border: rgba(184,137,42,0.15);
 }
 
 body {
-  background: #02020D;
-  color: #dde4f0;
+  background: var(--bg);
+  color: var(--ink);
   font-family: 'Cormorant Garamond', serif;
   overflow-x: hidden;
-  cursor: default;
-}
-
-/* ── NOISE OVERLAY ── */
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-  pointer-events: none;
-  z-index: 100;
-}
-
-/* ── STARFIELD ── */
-.starfield {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
-}
-.star {
-  position: absolute;
-  border-radius: 50%;
-  animation: twinkle var(--d) ease-in-out infinite var(--delay);
-  opacity: 0;
-}
-@keyframes twinkle {
-  0%, 100% { opacity: 0; }
-  50% { opacity: var(--op); }
 }
 
 /* ── HERO ── */
 .hero {
   position: relative;
-  z-index: 2;
   height: 100svh;
-  min-height: 600px;
+  min-height: 580px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
   padding: clamp(3rem, 8vw, 6rem) 2rem;
+  border-bottom: 1px solid var(--border);
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 55%, rgba(184,137,42,0.05) 0%, transparent 65%);
+  pointer-events: none;
 }
 
 .hero-eyebrow {
-  font-size: clamp(0.5rem, 1vw, 0.62rem);
-  letter-spacing: 0.28em;
+  font-size: clamp(0.46rem, 0.9vw, 0.56rem);
+  letter-spacing: 0.34em;
   text-transform: uppercase;
-  color: #c9a254;
-  margin-bottom: clamp(1.5rem, 4vw, 2.5rem);
+  color: var(--gold);
+  margin-bottom: clamp(1.5rem, 3.5vw, 2.5rem);
   opacity: 0;
   animation: rise 1.2s var(--ease-expo) forwards 0.3s;
 }
-
 .hero-logo {
-  width: clamp(200px, 36vw, 420px);
+  width: clamp(180px, 30vw, 360px);
   height: auto;
   margin-bottom: clamp(1.5rem, 3vw, 2rem);
-  filter: brightness(1.05);
   opacity: 0;
   animation: rise 1.4s var(--ease-expo) forwards 0.5s;
+  /* invert to dark if logo asset is white */
+  filter: invert(1) sepia(0.4) saturate(0.6) brightness(0.35);
 }
-
 .hero-rule {
   display: flex;
   align-items: center;
@@ -123,24 +83,21 @@ body::before {
   content: '';
   width: clamp(50px, 8vw, 120px);
   height: 1px;
-  background: linear-gradient(to right, transparent, #c9a254);
+  background: linear-gradient(to right, transparent, var(--gold));
 }
-.hero-rule::after { background: linear-gradient(to left, transparent, #c9a254); }
-.hero-rule span { color: #c9a254; font-size: 0.65rem; letter-spacing: 0.2em; }
-
+.hero-rule::after { background: linear-gradient(to left, transparent, var(--gold)); }
+.hero-rule span { color: var(--gold); font-size: 0.6rem; letter-spacing: 0.2em; }
 .hero-tagline {
-  font-size: clamp(1rem, 2.5vw, 1.35rem);
+  font-size: clamp(1rem, 2vw, 1.25rem);
   font-style: italic;
   font-weight: 300;
-  color: #8896b0;
+  color: var(--ink-dim);
   letter-spacing: 0.04em;
-  line-height: 1.7;
-  max-width: 480px;
+  line-height: 1.75;
+  max-width: 460px;
   opacity: 0;
   animation: rise 1.2s var(--ease-expo) forwards 1.05s;
 }
-
-/* Scroll indicator */
 .scroll-hint {
   position: absolute;
   bottom: clamp(1.5rem, 4vh, 2.5rem);
@@ -154,360 +111,266 @@ body::before {
   animation: rise 1s var(--ease-expo) forwards 1.8s;
 }
 .scroll-hint span {
-  font-size: 0.48rem;
-  letter-spacing: 0.3em;
+  font-size: 0.44rem;
+  letter-spacing: 0.32em;
   text-transform: uppercase;
-  color: #4a5a78;
+  color: var(--ink-faint);
 }
 .scroll-line {
   width: 1px;
   height: 40px;
-  background: linear-gradient(to bottom, #4a5a78, transparent);
+  background: linear-gradient(to bottom, var(--gold-rule), transparent);
   animation: drip 2s ease-in-out infinite 2.5s;
 }
 @keyframes drip {
-  0% { transform: scaleY(0); transform-origin: top; opacity: 1; }
-  50% { transform: scaleY(1); transform-origin: top; opacity: 1; }
-  51% { transform: scaleY(1); transform-origin: bottom; opacity: 1; }
+  0%   { transform: scaleY(0); transform-origin: top; opacity: 1; }
+  50%  { transform: scaleY(1); transform-origin: top; opacity: 1; }
+  51%  { transform: scaleY(1); transform-origin: bottom; opacity: 1; }
   100% { transform: scaleY(0); transform-origin: bottom; opacity: 0; }
 }
-
 @keyframes rise {
   from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
-/* ── THREE DOORS ── */
-.doors-section {
-  position: relative;
-  z-index: 2;
-  min-height: 100svh;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1.3fr;
-  transition: grid-template-columns 0.7s var(--ease-expo);
+/* ── JOURNEY INTRO ── */
+.journey-intro {
+  padding: clamp(4rem, 8vw, 6rem) 2rem clamp(3rem, 5vw, 4rem);
+  text-align: center;
+  border-bottom: 1px solid var(--border);
 }
-
-/* Each door */
-.door {
-  position: relative;
-  min-height: 100svh;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding: clamp(2rem, 5vw, 4rem) clamp(1.5rem, 4vw, 3.5rem);
-  overflow: hidden;
-  cursor: pointer;
-  transition:
-    flex 0.7s var(--ease-expo),
-    background-color 0.5s ease;
-  border-right: 1px solid rgba(255,255,255,0.04);
-  text-decoration: none;
-}
-.door:last-child { border-right: none; }
-
-/* Door backgrounds */
-.door--mind { background: var(--mind-bg); }
-.door--heart { background: var(--heart-bg); }
-.door--soul { background: var(--soul-bg); }
-
-/* Hover darkening overlay */
-.door::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  opacity: 0;
-  transition: opacity 0.5s ease;
-  pointer-events: none;
-  z-index: 0;
-}
-.door--mind::before { background: radial-gradient(ellipse at 50% 80%, rgba(80,140,255,0.07) 0%, transparent 70%); }
-.door--heart::before { background: radial-gradient(ellipse at 50% 80%, rgba(212,96,122,0.08) 0%, transparent 70%); }
-.door--soul::before { background: radial-gradient(ellipse at 50% 80%, rgba(180,140,255,0.07) 0%, transparent 70%); }
-.door:hover::before { opacity: 1; }
-
-/* Vertical divider line accent */
-.door::after {
-  content: '';
-  position: absolute;
-  top: 8%;
-  bottom: 8%;
-  right: 0;
-  width: 1px;
-  background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.06), transparent);
-}
-.door:last-child::after { display: none; }
-
-/* Floating particles per door */
-.door-particles {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
-}
-.particle {
-  position: absolute;
-  border-radius: 50%;
-  animation: drift var(--pd) ease-in-out infinite alternate var(--pdelay);
-}
-@keyframes drift {
-  0% { transform: translateY(0) translateX(0); opacity: var(--pop); }
-  100% { transform: translateY(var(--py)) translateX(var(--px)); opacity: calc(var(--pop) * 0.4); }
-}
-
-/* Door content */
-.door-content {
-  position: relative;
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-  gap: clamp(0.6rem, 1.5vw, 1rem);
-}
-
-.door-numeral {
-  font-size: clamp(0.5rem, 0.9vw, 0.6rem);
+.journey-intro-inner { max-width: 540px; margin: 0 auto; }
+.journey-eyebrow {
+  font-size: 0.52rem;
   letter-spacing: 0.3em;
   text-transform: uppercase;
-  font-weight: 400;
-  transition: color 0.4s ease;
+  color: var(--gold);
+  display: block;
+  margin-bottom: 1.2rem;
 }
-.door--mind .door-numeral { color: var(--mind-accent-dim); }
-.door--heart .door-numeral { color: var(--heart-accent-dim); }
-.door--soul .door-numeral { color: var(--soul-accent-dim); }
-
-.door-name {
-  font-size: clamp(2.2rem, 4.5vw, 4.8rem);
+.journey-title {
+  font-size: clamp(1.5rem, 2.8vw, 2.1rem);
   font-weight: 300;
   font-style: italic;
-  line-height: 0.95;
-  letter-spacing: -0.01em;
-  transition: color 0.4s ease;
+  color: var(--ink);
+  line-height: 1.3;
+  margin-bottom: 1.4rem;
 }
-.door--mind .door-name { color: var(--mind-accent); }
-.door--heart .door-name { color: var(--heart-accent); }
-.door--soul .door-name { color: var(--soul-accent); }
-
-.door-descriptor {
-  font-size: clamp(0.78rem, 1.2vw, 0.9rem);
+.journey-desc {
+  font-size: clamp(0.88rem, 1.5vw, 0.98rem);
+  color: var(--ink-dim);
   font-style: italic;
   font-weight: 300;
-  line-height: 1.7;
-  max-width: 280px;
-  transition: opacity 0.4s ease, color 0.4s ease;
+  line-height: 1.9;
 }
-.door--mind .door-descriptor { color: var(--mind-text-dim); }
-.door--heart .door-descriptor { color: var(--heart-text-dim); }
-.door--soul .door-descriptor { color: var(--soul-text-dim); }
+.journey-rule {
+  width: 36px;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--gold), transparent);
+  margin: 1.8rem auto 0;
+}
 
-/* Offerings list — hidden until hover */
-.door-offerings {
+/* ── OFFERING CARDS ── */
+.offerings-section { padding: 0; }
+
+.offering-card {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 28fr 44fr 28fr;
+  border-top: 1px solid var(--border);
+  padding: clamp(3.5rem, 7vw, 5.5rem) clamp(2rem, 7vw, 7rem);
+  gap: 0;
+  position: relative;
+  transition: background 0.5s ease, opacity 0.9s var(--ease-expo), transform 0.9s var(--ease-expo);
+  opacity: 0;
+  transform: translateY(28px);
+}
+.offering-card:last-child { border-bottom: 1px solid var(--border); }
+.offering-card.visible { opacity: 1; transform: translateY(0); }
+.offering-card:hover { background: var(--bg-warm); }
+
+/* Left accent bar */
+.offering-card::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 2px;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+.offering-card:nth-child(1)::before { background: linear-gradient(to bottom, #c9a254, #e6c16e); }
+.offering-card:nth-child(2)::before { background: linear-gradient(to bottom, #b04d65, #d4607a); }
+.offering-card:nth-child(3)::before { background: linear-gradient(to bottom, #7a6aaa, #a090cc); }
+.offering-card:nth-child(4)::before { background: linear-gradient(to bottom, #2a4a6a, #507aaa); }
+.offering-card:hover::before { opacity: 1; }
+
+/* Stagger */
+.offering-card:nth-child(1) { transition-delay: 0s; }
+.offering-card:nth-child(2) { transition-delay: 0.08s; }
+.offering-card:nth-child(3) { transition-delay: 0.16s; }
+.offering-card:nth-child(4) { transition-delay: 0.24s; }
+
+/* Left col */
+.offering-left {
   display: flex;
   flex-direction: column;
-  gap: 0.3rem;
-  overflow: hidden;
-  display: grid;
-  grid-template-rows: 0fr;
-  transition: grid-template-rows 0.6s var(--ease-expo);
+  gap: 0.7rem;
+  padding-right: 4rem;
+  justify-content: flex-start;
+  padding-top: 0.2rem;
+}
+.offering-num {
+  font-size: 0.48rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.offering-name {
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--ink);
+  line-height: 1.0;
+  letter-spacing: -0.01em;
+}
+.offering-stage {
+  font-size: 0.5rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
   margin-top: 0.2rem;
 }
-.door-offerings-inner { overflow: hidden; }
-.door:hover .door-offerings,
-.door:focus .door-offerings { grid-template-rows: 1fr; }
 
-.door-offering-item {
-  font-size: clamp(0.7rem, 1vw, 0.78rem);
-  letter-spacing: 0.08em;
-  font-weight: 300;
-  opacity: 0;
-  transform: translateY(8px);
-  transition: opacity 0.4s var(--ease-expo), transform 0.4s var(--ease-expo), color 0.3s ease;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+/* Center col */
+.offering-center {
+  padding: 0 4rem;
+  border-left: 1px solid var(--border);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.1rem;
 }
-.door--mind .door-offering-item { color: var(--mind-text-dim); }
-.door--heart .door-offering-item { color: var(--heart-text-dim); }
-.door--soul .door-offering-item { color: var(--soul-text-dim); }
-
-.door:hover .door-offering-item:nth-child(1) { opacity: 1; transform: translateY(0); transition-delay: 0.08s; }
-.door:hover .door-offering-item:nth-child(2) { opacity: 1; transform: translateY(0); transition-delay: 0.16s; }
-.door:hover .door-offering-item:nth-child(3) { opacity: 1; transform: translateY(0); transition-delay: 0.24s; }
-.door:hover .door-offering-item:nth-child(4) { opacity: 1; transform: translateY(0); transition-delay: 0.32s; }
-
-/* CTA — slides up on hover */
-.door-cta {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-  font-size: clamp(0.5rem, 0.8vw, 0.58rem);
-  letter-spacing: 0.28em;
+.offering-poetic {
+  font-size: clamp(1.1rem, 1.8vw, 1.25rem);
+  font-style: italic;
+  font-weight: 300;
+  color: var(--ink-mid);
+  line-height: 1.65;
+}
+.offering-body {
+  font-size: clamp(0.95rem, 1.5vw, 1.05rem);
+  color: var(--ink-dim);
+  font-weight: 300;
+  line-height: 1.95;
+}
+.offering-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.3rem;
+}
+.offering-tag {
+  font-size: 0.6rem;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  border: 1px solid transparent;
-  padding: 0.7rem 1.4rem;
-  margin-top: 0.8rem;
-  width: fit-content;
-  opacity: 0;
-  transform: translateY(12px);
-  transition:
-    opacity 0.5s var(--ease-expo) 0.1s,
-    transform 0.5s var(--ease-expo) 0.1s,
-    border-color 0.3s ease,
-    background 0.3s ease;
+  color: #7a5a10;
+  background: rgba(184,137,42,0.08);
+  border: 1px solid rgba(184,137,42,0.4);
+  padding: 0.35rem 0.9rem;
 }
-.door--mind .door-cta { color: var(--mind-accent); border-color: rgba(230,193,110,0.25); }
-.door--heart .door-cta { color: var(--heart-accent); border-color: rgba(212,96,122,0.25); }
-.door--soul .door-cta { color: var(--soul-accent); border-color: rgba(201,162,84,0.25); }
 
-.door:hover .door-cta { opacity: 1; transform: translateY(0); }
-.door--mind .door-cta:hover { background: rgba(230,193,110,0.06); border-color: rgba(230,193,110,0.5); }
-.door--heart .door-cta:hover { background: rgba(212,96,122,0.06); border-color: rgba(212,96,122,0.5); }
-.door--soul .door-cta:hover { background: rgba(201,162,84,0.06); border-color: rgba(201,162,84,0.5); }
-
-.door-cta svg { transition: transform 0.3s var(--ease-expo); }
-.door-cta:hover svg { transform: translateX(4px); }
-
-/* Top-right number — large decorative */
-.door-large-num {
-  position: absolute;
-  top: clamp(1.5rem, 4vw, 3rem);
-  right: clamp(1.2rem, 3vw, 2.5rem);
-  font-size: clamp(4rem, 10vw, 10rem);
-  font-weight: 300;
+/* Right col */
+.offering-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  padding-left: 4rem;
+  gap: 0.5rem;
+}
+.offering-price-main {
+  font-size: clamp(1.2rem, 2vw, 1.6rem);
+  font-weight: 400;
+  color: var(--ink);
+  text-align: right;
+  line-height: 1.2;
+}
+.offering-price-sub {
+  font-size: 0.85rem;
   font-style: italic;
-  line-height: 1;
-  letter-spacing: -0.04em;
-  opacity: 0.04;
-  transition: opacity 0.5s ease;
-  pointer-events: none;
-  z-index: 1;
-}
-.door--mind .door-large-num { color: var(--mind-accent); }
-.door--heart .door-large-num { color: var(--heart-accent); }
-.door--soul .door-large-num { color: var(--soul-accent); }
-.door:hover .door-large-num { opacity: 0.07; }
-
-/* Entrance animation for doors section */
-.door {
-  opacity: 0;
-  transform: translateY(30px);
-  transition:
-    opacity 0.9s var(--ease-expo),
-    transform 0.9s var(--ease-expo),
-    background-color 0.5s ease;
-}
-.door.visible { opacity: 1; transform: translateY(0); }
-.door:nth-child(1) { transition-delay: 0s; }
-.door:nth-child(2) { transition-delay: 0.1s; }
-.door:nth-child(3) { transition-delay: 0.2s; }
-
-/* ── FOOTER ── */
-.footer {
-  position: relative;
-  z-index: 2;
-  padding: clamp(3rem, 6vw, 5rem) 2rem clamp(2rem, 4vw, 3rem);
-  text-align: center;
-  border-top: 1px solid rgba(230,193,110,0.08);
-}
-.footer-name {
-  font-size: clamp(0.85rem, 1.5vw, 1.1rem);
-  font-style: italic;
-  color: #c4d0e8;
-  letter-spacing: 0.06em;
-  margin-bottom: 0.4rem;
-}
-.footer-tagline {
-  font-size: clamp(0.7rem, 1.2vw, 0.88rem);
-  font-style: italic;
-  color: #4a5a78;
-  margin-bottom: 1.8rem;
+  color: var(--ink-faint);
+  text-align: right;
   line-height: 1.6;
 }
-.footer-social {
+.offering-price-tiers {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1.2rem;
-  margin-bottom: 1.5rem;
+  flex-direction: column;
+  gap: 0.28rem;
+  margin-top: 0.5rem;
+  text-align: right;
 }
-.social-link {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 34px;
-  height: 34px;
-  border: 1px solid rgba(230,193,110,0.15);
-  color: #c9a254;
-  text-decoration: none;
-  transition: border-color 0.25s, color 0.25s, transform 0.25s;
+.offering-price-tiers span {
+  font-size: 0.82rem;
+  color: var(--ink-dim);
+  font-style: italic;
+  line-height: 1.5;
 }
-.social-link:hover { border-color: #e6c16e; color: #e6c16e; transform: translateY(-2px); }
-.social-link svg { width: 14px; height: 14px; fill: currentColor; }
-.footer-copy {
-  font-size: 0.5rem;
-  letter-spacing: 0.2em;
-  color: rgba(230,193,110,0.15);
+.offering-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.48rem;
+  letter-spacing: 0.26em;
   text-transform: uppercase;
+  color: var(--gold);
+  border: 1px solid var(--gold-rule);
+  padding: 0.65rem 1.3rem;
+  margin-top: 1.2rem;
+  text-decoration: none;
+  transition: border-color 0.3s, background 0.3s;
+  white-space: nowrap;
 }
-
-/* ── MOBILE ── */
-@media (max-width: 768px) {
-  .doors-section {
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
-    min-height: auto;
-  }
-  .door {
-    min-height: 100svh;
-    border-right: none;
-    border-bottom: 1px solid rgba(255,255,255,0.04);
-    justify-content: flex-end;
-  }
-  .door:last-child { border-bottom: none; }
-  .door::after { display: none; }
-  .door-name { font-size: clamp(2.8rem, 12vw, 5rem); }
-  .door-offerings { grid-template-rows: 1fr; }
-  .door-offering-item { opacity: 0.6; transform: translateY(0); }
-  .door-cta { opacity: 1; transform: translateY(0); }
-  .door-large-num { font-size: clamp(5rem, 20vw, 10rem); opacity: 0.05; }
+.offering-cta:hover {
+  border-color: var(--gold);
+  background: rgba(184,137,42,0.04);
 }
-
-@media (max-width: 480px) {
-  .door { padding: 2rem 1.5rem; }
-}
+.offering-cta svg { transition: transform 0.3s var(--ease-expo); }
+.offering-cta:hover svg { transform: translateX(3px); }
 
 /* ── ABOUT ── */
 .about-section {
-  position: relative;
-  z-index: 2;
-  padding: clamp(5rem, 10vw, 8rem) 2rem clamp(4rem, 8vw, 6rem);
-  border-top: 1px solid rgba(230,193,110,0.06);
+  padding: clamp(5rem, 10vw, 8rem) 2rem;
+  border-top: 1px solid var(--border);
+  background: var(--bg-warm);
 }
 .about-inner { max-width: 660px; margin: 0 auto; text-align: center; }
 .about-eyebrow {
-  font-size: 0.58rem; letter-spacing: 0.28em; text-transform: uppercase;
-  color: #c9a254; display: block; margin-bottom: 1rem;
+  font-size: 0.52rem; letter-spacing: 0.28em; text-transform: uppercase;
+  color: var(--gold); display: block; margin-bottom: 1rem;
   opacity: 0; transform: translateY(16px);
   transition: opacity 0.8s var(--ease-expo), transform 0.8s var(--ease-expo);
 }
 .about-title {
-  font-size: clamp(1.5rem, 3vw, 2.1rem); font-weight: 300; font-style: italic;
-  color: #e4ecf8; letter-spacing: 0.02em; line-height: 1.35;
-  margin-bottom: clamp(1.5rem, 3vw, 2.2rem);
+  font-size: clamp(1.4rem, 2.6vw, 1.95rem); font-weight: 300; font-style: italic;
+  color: var(--ink); letter-spacing: 0.02em; line-height: 1.35;
+  margin-bottom: clamp(1.5rem, 3vw, 2rem);
   opacity: 0; transform: translateY(16px);
   transition: opacity 0.9s var(--ease-expo) 0.08s, transform 0.9s var(--ease-expo) 0.08s;
 }
 .about-rule {
-  width: 40px; height: 1px;
-  background: linear-gradient(to right, transparent, #c9a254, transparent);
+  width: 36px; height: 1px;
+  background: linear-gradient(to right, transparent, var(--gold), transparent);
   margin: 0 auto clamp(2rem, 4vw, 3rem);
   opacity: 0; transition: opacity 0.8s var(--ease-expo) 0.15s;
 }
 .about-body {
-  display: flex; flex-direction: column; gap: clamp(1.2rem, 2.5vw, 1.8rem);
-  text-align: justify;
+  display: flex; flex-direction: column; gap: 1.5rem; text-align: justify;
   opacity: 0; transform: translateY(16px);
   transition: opacity 1s var(--ease-expo) 0.2s, transform 1s var(--ease-expo) 0.2s;
 }
-.about-body p { font-size: clamp(0.95rem, 1.8vw, 1.08rem); color: #7a88a0; line-height: 1.95; font-weight: 300; }
+.about-body p { font-size: clamp(1rem, 1.7vw, 1.1rem); color: var(--ink-mid); line-height: 1.95; font-weight: 300; }
 .about-credential {
   display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem;
   margin-top: clamp(2rem, 4vw, 3rem);
@@ -515,8 +378,9 @@ body::before {
   transition: opacity 0.8s var(--ease-expo) 0.3s, transform 0.8s var(--ease-expo) 0.3s;
 }
 .about-credential span {
-  font-size: 0.5rem; letter-spacing: 0.2em; text-transform: uppercase;
-  color: #c9a254; border: 1px solid rgba(230,193,110,0.18); padding: 0.3rem 0.9rem;
+  font-size: 0.58rem; letter-spacing: 0.18em; text-transform: uppercase;
+  color: #7a5a10; background: rgba(184,137,42,0.08);
+  border: 1px solid rgba(184,137,42,0.4); padding: 0.32rem 0.9rem;
 }
 .about-section.visible .about-eyebrow,
 .about-section.visible .about-title,
@@ -524,469 +388,73 @@ body::before {
 .about-section.visible .about-body,
 .about-section.visible .about-credential { opacity: 1; transform: translateY(0); }
 
-/* ── TIER I ENTRY SECTION ── */
-.tier1-section {
-  position: relative;
-  z-index: 2;
-  padding: clamp(5rem, 10vw, 8rem) 0;
-  border-top: 1px solid rgba(230,193,110,0.06);
-}
-.tier1-wrap {
-  max-width: 860px;
-  margin: 0 auto;
-  padding: 0 2rem;
-}
-.tier1-head {
-  text-align: center;
-  margin-bottom: clamp(3rem, 6vw, 5rem);
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.9s var(--ease-expo), transform 0.9s var(--ease-expo);
-}
-.tier1-head.visible { opacity: 1; transform: translateY(0); }
-.tier1-eye {
-  font-size: 0.58rem;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-  color: #c9a254;
-  display: block;
-  margin-bottom: 1rem;
-}
-.tier1-title {
-  font-size: clamp(1.6rem, 3.5vw, 2.4rem);
-  font-weight: 300;
-  font-style: italic;
-  color: #e4ecf8;
-  line-height: 1.25;
-  margin-bottom: 1.2rem;
-  letter-spacing: 0.01em;
-}
-.tier1-desc {
-  font-size: clamp(0.9rem, 1.6vw, 1rem);
-  color: #5a6880;
-  font-style: italic;
-  font-weight: 300;
-  max-width: 520px;
-  margin: 0 auto;
-  line-height: 1.8;
-}
-.tier1-line {
-  width: 36px;
-  height: 1px;
-  background: linear-gradient(to right, transparent, #c9a254, transparent);
-  margin: 1.8rem auto 0;
-}
-.tier1-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: clamp(0.8rem, 2vw, 1.2rem);
-  margin-bottom: clamp(1.5rem, 3vw, 2rem);
-}
-.tier1-card {
-  background: #06061a;
-  border: 1px solid rgba(230,193,110,0.07);
-  padding: clamp(1.4rem, 3vw, 2rem);
-  transition: border-color 0.3s ease, transform 0.3s var(--ease-expo);
-  opacity: 0;
-  transform: translateY(24px);
-}
-.tier1-card.visible { opacity: 1; transform: translateY(0); }
-.tier1-card:hover { border-color: rgba(230,193,110,0.18); transform: translateY(-2px); }
-.tier1-card-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 1rem;
-  margin-bottom: 0.7rem;
-}
-.tier1-num {
-  font-size: 0.5rem;
-  letter-spacing: 0.22em;
-  color: #c9a254;
-  text-transform: uppercase;
-  display: block;
-  margin-bottom: 0.3rem;
-}
-.tier1-name {
-  font-size: clamp(1rem, 2vw, 1.2rem);
-  font-weight: 400;
-  color: #e4ecf8;
-  letter-spacing: 0.03em;
-  line-height: 1.3;
-}
-.tier1-price { text-align: right; flex-shrink: 0; }
-.tier1-usd {
-  font-size: clamp(1rem, 2vw, 1.2rem);
-  color: #e6c16e;
-  display: block;
-  line-height: 1.2;
-}
-.tier1-idr {
-  font-size: 0.82rem;
-  color: #4a5a78;
-  font-style: italic;
-  display: block;
-}
-.tier1-poetic {
-  font-size: 0.88rem;
-  font-style: italic;
-  color: #4a5878;
-  margin-bottom: 0.6rem;
-  line-height: 1.65;
-  font-weight: 300;
-}
-.tier1-body {
-  font-size: 0.82rem;
-  color: #6a7890;
-  line-height: 1.8;
-  font-weight: 300;
-}
-.tier1-addon {
-  display: flex;
-  align-items: flex-start;
-  gap: 1.2rem;
-  background: rgba(230,193,110,0.04);
-  border: 1px solid rgba(230,193,110,0.1);
-  border-left: 2px solid #c9a254;
-  padding: 1.2rem 1.5rem;
-  margin-bottom: clamp(2rem, 4vw, 3rem);
-  opacity: 0;
-  transform: translateY(16px);
-  transition: opacity 0.8s var(--ease-expo) 0.2s, transform 0.8s var(--ease-expo) 0.2s;
-}
-.tier1-addon.visible { opacity: 1; transform: translateY(0); }
-.tier1-addon-icon { color: #c9a254; font-size: 1.1rem; flex-shrink: 0; margin-top: 0.1rem; }
-.tier1-addon-title {
-  display: block;
-  font-size: 0.55rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: #e6c16e;
-  margin-bottom: 0.3rem;
-}
-.tier1-addon-desc {
-  font-size: 0.82rem;
-  color: #4a5a78;
-  font-style: italic;
-  line-height: 1.6;
-}
-.tier1-cta-wrap {
-  text-align: center;
-  opacity: 0;
-  transform: translateY(12px);
-  transition: opacity 0.8s var(--ease-expo) 0.3s, transform 0.8s var(--ease-expo) 0.3s;
-}
-.tier1-cta-wrap.visible { opacity: 1; transform: translateY(0); }
-.tier1-cta-note {
-  font-size: 0.88rem;
-  font-style: italic;
-  color: #4a5a78;
-  margin-bottom: 1rem;
-}
-.tier1-scroll-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-  font-size: 0.55rem;
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
-  color: #c9a254;
-  border: 1px solid rgba(230,193,110,0.25);
-  padding: 0.8rem 1.8rem;
-  text-decoration: none;
-  transition: border-color 0.3s, color 0.3s, background 0.3s;
-}
-.tier1-scroll-btn:hover {
-  border-color: rgba(230,193,110,0.6);
-  background: rgba(230,193,110,0.05);
-}
-.tier1-scroll-btn svg { transition: transform 0.3s var(--ease-expo); }
-.tier1-scroll-btn:hover svg { transform: translateY(3px); }
-
-@media (max-width: 600px) {
-  .tier1-grid { grid-template-columns: 1fr; }
-  .tier1-addon { flex-wrap: wrap; }
-}
-
-/* ── BOOKING FORM ── */
-.booking-section {
-  position: relative;
-  z-index: 2;
-  padding: clamp(5rem, 10vw, 8rem) 2rem clamp(4rem, 8vw, 6rem);
-  border-top: 1px solid rgba(230,193,110,0.06);
-}
-.booking-wrap {
-  max-width: 760px;
-  margin: 0 auto;
-}
-.booking-head {
-  text-align: center;
-  margin-bottom: clamp(3rem, 6vw, 4.5rem);
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.9s var(--ease-expo), transform 0.9s var(--ease-expo);
-}
-.booking-head.visible { opacity: 1; transform: translateY(0); }
-.booking-eye {
-  font-size: 0.58rem;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-  color: #c9a254;
-  display: block;
-  margin-bottom: 1rem;
-}
-.booking-title {
-  font-size: clamp(1.5rem, 3vw, 2.1rem);
-  font-weight: 300;
-  font-style: italic;
-  color: #e4ecf8;
-  letter-spacing: 0.02em;
-  line-height: 1.3;
-  margin-bottom: 0.8rem;
-}
-.booking-desc {
-  font-size: clamp(0.88rem, 1.6vw, 0.95rem);
-  color: #8896b0;
-  font-style: italic;
-  font-weight: 300;
-  line-height: 1.8;
-}
-.booking-rule {
-  width: 36px; height: 1px;
-  background: linear-gradient(to right, transparent, #c9a254, transparent);
-  margin: 1.5rem auto 0;
-}
-
-/* Form shell */
-.form-shell {
-  background: #06061a;
-  border: 1px solid rgba(230,193,110,0.08);
-  padding: clamp(2rem, 5vw, 3.5rem);
-  position: relative;
-  opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 1s var(--ease-expo) 0.1s, transform 1s var(--ease-expo) 0.1s;
-}
-.form-shell.visible { opacity: 1; transform: translateY(0); }
-.form-shell::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 1px;
-  background: linear-gradient(to right, transparent, #c9a254, transparent);
-}
-
-/* Form group titles */
-.form-group-label {
-  font-size: 0.52rem;
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
-  color: #c9a254;
-  display: block;
-  margin-bottom: 1.2rem;
-  padding-bottom: 0.6rem;
-  border-bottom: 1px solid rgba(230,193,110,0.08);
-}
-
-/* Grid */
-.form-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
-  margin-bottom: 1rem;
-}
-.form-row.single { grid-template-columns: 1fr; }
-.form-row.triple { grid-template-columns: 1fr 1fr 1fr; }
-
-/* Fields */
-.f-field { display: flex; flex-direction: column; gap: 0.4rem; }
-.f-field.span-2 { grid-column: 1 / -1; }
-.f-label {
-  font-size: 0.5rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: #6a7e9a;
-}
-.f-field input,
-.f-field select,
-.f-field textarea {
-  background: rgba(255,255,255,0.02);
-  border: 1px solid rgba(230,193,110,0.08);
-  color: #dde4f0;
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 0.95rem;
-  padding: 0.65rem 0.9rem;
-  outline: none;
-  transition: border-color 0.25s, background 0.25s;
-  width: 100%;
-  appearance: none;
-  -webkit-appearance: none;
-  border-radius: 0;
-}
-.f-field input::placeholder,
-.f-field textarea::placeholder { color: #3a4a62; font-style: italic; }
-.f-field input:focus,
-.f-field select:focus,
-.f-field textarea:focus {
-  border-color: rgba(230,193,110,0.3);
-  background: rgba(230,193,110,0.02);
-}
-.f-field select {
-  background-color: #06061a;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23c9a254'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 0.9rem center;
-  padding-right: 2.2rem;
-  cursor: pointer;
-  color-scheme: dark;
-}
-.f-field select option { background: #06061a; color: #c4d0e8; }
-.f-field select optgroup { background: #06061a; color: #c9a254; }
-.f-field textarea { resize: vertical; min-height: 90px; line-height: 1.6; }
-
-.form-sep {
-  margin: 2rem 0;
-  border: none;
-  border-top: 1px solid rgba(230,193,110,0.06);
-}
-
-/* Submit row */
-.submit-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1.5rem;
-  margin-top: 2rem;
-  flex-wrap: wrap;
-}
-.submit-note {
-  font-size: 0.78rem;
-  font-style: italic;
-  color: #6a7e9a;
-  line-height: 1.6;
-  max-width: 380px;
-}
-.submit-btn {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 0.6rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: #02020D;
-  background: #c9a254;
-  border: none;
-  padding: 0.95rem 2.4rem;
-  cursor: pointer;
-  transition: background 0.25s, transform 0.2s;
-  flex-shrink: 0;
-}
-.submit-btn:hover { background: #e6c16e; transform: translateY(-1px); }
-
-/* Success state */
-#success-msg {
-  display: none;
-  text-align: center;
-  padding: 2.5rem 0;
-}
-.success-mark {
-  font-size: 0.65rem;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-  color: #e6c16e;
-  margin-bottom: 1rem;
-  display: block;
-}
-.success-body {
-  font-size: 0.95rem;
-  font-style: italic;
-  color: #8896b0;
-  line-height: 1.8;
-  max-width: 460px;
-  margin: 0 auto 2rem;
-}
-.wa-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.7rem;
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 0.6rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: #02020D;
-  background: #c9a254;
-  border: none;
-  padding: 0.95rem 2.4rem;
-  cursor: pointer;
-  transition: background 0.25s;
-}
-.wa-btn:hover { background: #e6c16e; }
-
-@media (max-width: 640px) {
-  .form-row { grid-template-columns: 1fr; }
-  .form-row.triple { grid-template-columns: 1fr; }
-  .f-field.span-2 { grid-column: 1; }
-  .submit-row { flex-direction: column; align-items: stretch; }
-  .submit-btn, .wa-btn { width: 100%; text-align: center; justify-content: center; }
-  .submit-note { max-width: 100%; }
-  .form-shell { padding: 1.5rem 1.2rem; }
-}
-.footer-logo {
-  width: clamp(120px, 20vw, 180px);
-  height: auto;
-  margin-bottom: 0.8rem;
-  opacity: 0.85;
-  filter: brightness(1.05);
-}
-
-.footer-sub { font-style: italic; color: #c9a254; font-size: 0.9rem; margin-bottom: 0.6rem; }
-.footer-promise { font-style: italic; color: #4a5a78; font-size: 0.88rem; margin-bottom: 1.2rem; line-height: 1.7; }
-
-/* ── FOOTER OVERRIDE ── */
+/* ── FOOTER ── */
 .footer {
-  padding: 7rem 0 5rem;
+  padding: clamp(4rem, 8vw, 6rem) 2rem clamp(2.5rem, 5vw, 3.5rem);
   text-align: center;
-  border-top: 1px solid rgba(230,193,110,0.08);
-  position: relative;
-  z-index: 2;
+  border-top: 1px solid var(--border);
+  background: var(--bg);
 }
 .footer-logo {
-  width: clamp(120px, 20vw, 180px);
+  width: clamp(100px, 15vw, 145px);
   height: auto;
-  margin-bottom: 1.8rem;
-  opacity: 0.85;
-  filter: brightness(1.05);
+  margin: 0 auto 1.5rem;
   display: block;
-  margin-left: auto;
-  margin-right: auto;
+  opacity: 0.65;
+  filter: invert(1) sepia(0.4) saturate(0.6) brightness(0.35);
 }
-.footer-sub {
-  font-family: 'Cormorant Garamond', serif;
-  font-style: italic;
-  color: #c9a254;
-  font-size: 0.9rem;
-  margin-bottom: 1rem;
-}
+.footer-sub { font-style: italic; color: var(--gold); font-size: 0.88rem; margin-bottom: 0.6rem; }
 .footer-promise {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.05rem;
-  font-style: italic;
-  color: #4a5a78;
-  max-width: 380px;
-  margin: 0 auto 2.5rem;
-  line-height: 1.9;
+  font-size: 0.98rem; font-style: italic; color: var(--ink-faint);
+  max-width: 340px; margin: 0 auto 2rem; line-height: 1.9;
 }
+.footer-social {
+  display: flex; align-items: center; justify-content: center;
+  gap: 1rem; margin-bottom: 1.8rem;
+}
+.social-link {
+  display: flex; align-items: center; justify-content: center;
+  width: 30px; height: 30px;
+  border: 1px solid var(--gold-rule);
+  color: var(--gold); text-decoration: none;
+  transition: border-color 0.25s, transform 0.25s;
+}
+.social-link:hover { border-color: var(--gold); transform: translateY(-2px); }
+.social-link svg { width: 12px; height: 12px; fill: currentColor; }
 .footer-copy {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 0.55rem;
-  letter-spacing: 0.18em;
-  color: rgba(230,193,110,0.2);
-  text-transform: uppercase;
-  margin-bottom: 2rem;
+  font-size: 0.46rem; letter-spacing: 0.2em;
+  color: var(--ink-faint); text-transform: uppercase;
+}
+
+/* ── MOBILE ── */
+@media (max-width: 860px) {
+  .offering-card {
+    grid-template-columns: 1fr;
+    padding: clamp(2.5rem, 5vw, 4rem) clamp(1.5rem, 4vw, 2.5rem);
+    gap: 2.2rem;
+  }
+  .offering-left { padding-right: 0; }
+  .offering-center {
+    padding: 2rem 0;
+    border-left: none; border-right: none;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .offering-right {
+    padding-left: 0;
+    align-items: flex-start;
+  }
+  .offering-price-main,
+  .offering-price-sub,
+  .offering-price-tiers { text-align: left; }
+  .offering-cta { margin-top: 0.8rem; }
+}
+@media (max-width: 480px) {
+  .offering-card { padding: 2rem 1.2rem; }
 }
 </style>
 </head>
 <body>
-
-<div class="starfield" id="sf"></div>
 
 <!-- ── HERO ── -->
 <section class="hero">
@@ -1000,171 +468,125 @@ body::before {
   </div>
 </section>
 
-<!-- ── TIER I — ENTRY READINGS ── -->
-<section class="tier1-section" id="begin">
-  <div class="tier1-wrap">
-
-    <div class="tier1-head">
-      <span class="tier1-eye">Begin here</span>
-      <h2 class="tier1-title">Not sure where you belong?<br>Start with a question.</h2>
-      <p class="tier1-desc">Four focused readings for those who are curious, unsettled, or simply need one honest answer from the stars. No commitment to a direction yet — just clarity about this moment.</p>
-      <div class="tier1-line"></div>
-    </div>
-
-    <div class="tier1-grid">
-
-      <div class="tier1-card">
-        <div class="tier1-card-top">
-          <div>
-            <span class="tier1-num">01</span>
-            <h3 class="tier1-name">Mini Reading</h3>
-          </div>
-          <div class="tier1-price">
-            <span class="tier1-usd">$35</span>
-            <span class="tier1-idr">IDR 449k</span>
-          </div>
-        </div>
-        <p class="tier1-poetic">One question. One honest answer from the stars.</p>
-        <p class="tier1-body">For when you have one specific question and need a direct, focused response. No expansive context needed, only the most pressing thing on your mind.</p>
-      </div>
-
-      <div class="tier1-card">
-        <div class="tier1-card-top">
-          <div>
-            <span class="tier1-num">02</span>
-            <h3 class="tier1-name">Current State Reading</h3>
-          </div>
-          <div class="tier1-price">
-            <span class="tier1-usd">$75</span>
-            <span class="tier1-idr">IDR 999k</span>
-          </div>
-        </div>
-        <p class="tier1-poetic">A clear-eyed look at where you are and what the cosmos says about where you are going.</p>
-        <p class="tier1-body">Sometimes you simply need to know what is happening in your life right now. A broad, honest overview of your current energetic landscape. Draws from Tarot, Astrology, and I Ching.</p>
-      </div>
-
-      <div class="tier1-card">
-        <div class="tier1-card-top">
-          <div>
-            <span class="tier1-num">03</span>
-            <h3 class="tier1-name">Yes / No + Timing</h3>
-          </div>
-          <div class="tier1-price">
-            <span class="tier1-usd">$55</span>
-            <span class="tier1-idr">IDR 699k</span>
-          </div>
-        </div>
-        <p class="tier1-poetic">The answer you need, and when to expect it.</p>
-        <p class="tier1-body">A specific yes/no question with a window of timing; when the energy shifts, when action is favoured, when patience is required. Direct, honest, and grounded.</p>
-      </div>
-
-      <div class="tier1-card">
-        <div class="tier1-card-top">
-          <div>
-            <span class="tier1-num">04</span>
-            <h3 class="tier1-name">I Ching Oracle</h3>
-          </div>
-          <div class="tier1-price">
-            <span class="tier1-usd">$75</span>
-            <span class="tier1-idr">IDR 999k</span>
-          </div>
-        </div>
-        <p class="tier1-poetic">An ancient mirror held up to your present moment.</p>
-        <p class="tier1-body">One of the oldest divination systems in existence showing you the nature of the forces at work and what posture the moment requires of you. Wise, patient, and extraordinarily precise.</p>
-      </div>
-
-    </div>
-
-    <div class="tier1-addon">
-      <span class="tier1-addon-icon">◈</span>
-      <div>
-        <span class="tier1-addon-title">PDF Report Add-On</span>
-        <span class="tier1-addon-desc">All entry readings are delivered as written responses via chat. Add a beautifully formatted PDF report to any reading for +$20 · +IDR 259k.</span>
-      </div>
-    </div>
-
-    <div class="tier1-cta-wrap">
-      <p class="tier1-cta-note">Ready for a deeper reading? Choose your path below.</p>
-      <a href="#doors" class="tier1-scroll-btn">
-        Enter the Three Doors
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
-      </a>
-    </div>
-
+<!-- ── JOURNEY INTRO ── -->
+<section class="journey-intro">
+  <div class="journey-intro-inner">
+    <span class="journey-eyebrow">A path, not a menu</span>
+    <h2 class="journey-title">Every offering exists<br>at a different depth of knowing.</h2>
+    <p class="journey-desc">Begin where you are. Move when you are ready. There is no wrong door — only the one that is right for this moment.</p>
+    <div class="journey-rule"></div>
   </div>
 </section>
 
-<!-- ── THREE DOORS ── -->
-<section class="doors-section" id="doors">
+<!-- ── OFFERING CARDS ── -->
+<section class="offerings-section">
 
-  <!-- THE MIND -->
-  <a href="mind.html" class="door door--mind" aria-label="The Mind — Strategic readings">
-    <div class="door-particles" id="p-mind"></div>
-    <span class="door-large-num">I</span>
-    <div class="door-content">
-      <span class="door-numeral">I · The Mind</span>
-      <h2 class="door-name">The<br>Mind</h2>
-      <p class="door-descriptor">For the founder at a crossroads. Strategic clarity through ancient intelligence.</p>
-      <div class="door-offerings">
-        <div class="door-offerings-inner">
-          <p class="door-offering-item">✦ Business Clarity Session</p>
-          <p class="door-offering-item">✦ Business Outlook Reading</p>
-          <p class="door-offering-item">✦ Launch Reading</p>
-          <p class="door-offering-item">✦ Founder's Compass</p>
-        </div>
-      </div>
-      <span class="door-cta">
-        Enter
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </span>
+  <div class="offering-card">
+    <div class="offering-left">
+      <span class="offering-num">01</span>
+      <h2 class="offering-name">Cards &amp;<br>Coffees</h2>
+      <span class="offering-stage">Recognise the Self</span>
     </div>
-  </a>
+    <div class="offering-center">
+      <p class="offering-poetic">A café, a deck, a question. Your first step into knowing.</p>
+      <p class="offering-body">An intimate onsite reading experience in a space of your choice, designed for those just beginning to ask about the self. Bring more friends, bring curiosity. Each session uses Tarot as the primary lens, with Ba Zi or astrology charts prepared in advance if necessary. Twenty minutes per person. A crystal to carry home.</p>
+      <div class="offering-tags">
+        <span class="offering-tag">Onsite · Jakarta &amp; Tangsel</span>
+        <span class="offering-tag">Tarot · Ba Zi · Astrology</span>
+        <span class="offering-tag">Solo or Group</span>
+      </div>
+    </div>
+    <div class="offering-right">
+      <span class="offering-price-main">From IDR 350k</span>
+      <span class="offering-price-sub">per person</span>
+      <div class="offering-price-tiers">
+        <span>Solo — IDR 750k</span>
+        <span>Duo — IDR 650k / person</span>
+        <span>Trio — IDR 500k / person</span>
+        <span>Quartet (max. 7 pax) — IDR 350k / person</span>
+        <span>Event with 8+ people — IDR 400k / person</span>
+      </div>
+      <a href="https://instagram.com/karsa.bintang" target="_blank" class="offering-cta">
+        Book via Instagram
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
 
-  <!-- THE HEART -->
-  <a href="heart.html" class="door door--heart" aria-label="The Heart — Love readings">
-    <div class="door-particles" id="p-heart"></div>
-    <span class="door-large-num">II</span>
-    <div class="door-content">
-      <span class="door-numeral">II · The Heart</span>
-      <h2 class="door-name">The<br>Heart</h2>
-      <p class="door-descriptor">To soothe the wary souls. Readings for those who love, long, and dare to ask.</p>
-      <div class="door-offerings">
-        <div class="door-offerings-inner">
-          <p class="door-offering-item">✦ The Soulmate Reading</p>
-          <p class="door-offering-item">✦ Relationship Dynamics</p>
-          <p class="door-offering-item">✦ Past Life Connection</p>
-          <p class="door-offering-item">✦ Channeled Letters & Poems</p>
-        </div>
-      </div>
-      <span class="door-cta">
-        Enter
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </span>
+  <div class="offering-card">
+    <div class="offering-left">
+      <span class="offering-num">02</span>
+      <h2 class="offering-name">Self-Discovery<br>Session</h2>
+      <span class="offering-stage">Discover the Self</span>
     </div>
-  </a>
+    <div class="offering-center">
+      <p class="offering-poetic">You have begun asking. Now learn to read the map.</p>
+      <p class="offering-body">A deeper onsite experience weaving approaches to learn about the self into the reading so you leave understanding both the insight and the system behind it. Draws from Tarot, Ba Zi, Human Design, and Western Astrology depending on what the moment requires. For those already in the ecosystem, ready to go further.</p>
+      <div class="offering-tags">
+        <span class="offering-tag">Onsite · 60 min</span>
+        <span class="offering-tag">Tarot · Ba Zi · Human Design · Astrology</span>
+      </div>
+    </div>
+    <div class="offering-right">
+      <span class="offering-price-main">IDR 750k</span>
+      <span class="offering-price-sub">per person<br>includes chart preparation</span>
+      <a href="https://instagram.com/karsa.bintang" target="_blank" class="offering-cta">
+        Book via Instagram
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
 
-  <!-- THE SOUL -->
-  <a href="soul.html" class="door door--soul" aria-label="The Soul — Self Introduction Rites">
-    <div class="door-particles" id="p-soul"></div>
-    <span class="door-large-num">III</span>
-    <div class="door-content">
-      <span class="door-numeral">III · The Soul</span>
-      <h2 class="door-name">The<br>Soul</h2>
-      <p class="door-descriptor">A ceremonial encounter with the self you have always been. For those ready to be fully witnessed.</p>
-      <div class="door-offerings">
-        <div class="door-offerings-inner">
-          <p class="door-offering-item">✦ The Initiate — $222</p>
-          <p class="door-offering-item">✦ The Savant — $333</p>
-          <p class="door-offering-item">✦ The Sage — $444</p>
-          <p class="door-offering-item">✦ Know Your Living Soul</p>
-        </div>
-      </div>
-      <span class="door-cta">
-        Enter the Rites
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </span>
+  <div class="offering-card">
+    <div class="offering-left">
+      <span class="offering-num">03</span>
+      <h2 class="offering-name">The Codex<br>of Self</h2>
+      <span class="offering-stage">Document the Self</span>
     </div>
-  </a>
+    <div class="offering-center">
+      <p class="offering-poetic">A written portrait of who you are — kept, returned to, carried.</p>
+      <p class="offering-body">A comprehensive written document synthesising your symbolic blueprint across multiple systems. A reference you can return to for years. Delivered as a beautifully formatted PDF you can print for yourself at any moment. The Codex can be received at any stage of your journey, as an anchor or as a milestone.</p>
+      <div class="offering-tags">
+        <span class="offering-tag">Written · PDF Delivery</span>
+        <span class="offering-tag">Multi-System</span>
+        <span class="offering-tag">Any Stage of the Journey</span>
+      </div>
+    </div>
+    <div class="offering-right">
+      <span class="offering-price-main">IDR 1,500k</span>
+      <span class="offering-price-sub">or $97 USD<br>full written report</span>
+      <a href="https://instagram.com/karsa.bintang" target="_blank" class="offering-cta">
+        Inquire via Instagram
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+
+  <div class="offering-card">
+    <div class="offering-left">
+      <span class="offering-num">04</span>
+      <h2 class="offering-name">SOLUM</h2>
+      <span class="offering-stage">Actualise the Self</span>
+    </div>
+    <div class="offering-center">
+      <p class="offering-poetic">For those who are done with insight alone and ready to actualise.</p>
+      <p class="offering-body">A private, sustained coaching engagement combining Law of Assumption with Ba Zi, Hellenistic Astrology, Human Design, and Tarot. A transformational series for you who wants to break out of your cocoon at last. SOLUM is for those who understand that the map was never the destination and that the self who holds it has always had the power to rewrite the territory.</p>
+      <div class="offering-tags">
+        <span class="offering-tag">1:1 Coaching Container</span>
+        <span class="offering-tag">Law of Assumption</span>
+        <span class="offering-tag">Full Modality Suite</span>
+        <span class="offering-tag">By Inquiry Only</span>
+      </div>
+    </div>
+    <div class="offering-right">
+      <span class="offering-price-main">By inquiry</span>
+      <span class="offering-price-sub">sustained container<br>pricing on consultation</span>
+      <a href="https://instagram.com/karsa.bintang" target="_blank" class="offering-cta">
+        Begin the Conversation
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
 
 </section>
 
@@ -1175,8 +597,8 @@ body::before {
     <h2 class="about-title">A map without direction<br>is just a sheet of paper.</h2>
     <div class="about-rule"></div>
     <div class="about-body">
-      <p>Most people do not come here because things are going well. They come because something is unclear, be it a decision that keeps circling, a chapter that feels stuck, or a path that once felt obvious and no longer does. They come because they have tried thinking their way through it, and thinking alone has not been enough.</p>
-      <p>Karsa Bintang was built at the intersection of structure and intuition, rigour and symbol, the ancient and the strategic. Karsa Bintang started off as a practice that grew quietly for sixteen years. It was deepened through an architecture education that taught how to read systems and hold complexity. It was sharpened through a business school education completed with honours, where the language of strategy became as familiar as the language of symbol.</p>
+      <p>Most people do not come to Karsa Bintang because things are going well. They come because something is unclear, be it a decision that keeps circling, a chapter that feels stuck, or a path that once felt obvious and no longer does. They come because thinking alone has not been enough.</p>
+      <p>Karsa Bintang was built at the intersection of structure and intuition, rigour and symbol, the ancient and the strategic. A practice that grew quietly for sixteen years, deepened through an architecture education that taught how to read systems and hold complexity, and sharpened through a business school education completed with honours.</p>
       <p>The result is a practice that does not choose between rigour and intuition, because the most precise readings have always required both. Every session is designed to be returned to. Every insight is meant to move you, not just comfort you.</p>
     </div>
     <div class="about-credential">
@@ -1184,330 +606,40 @@ body::before {
       <span>Tarot</span>
       <span>Hellenistic Astrology</span>
       <span>Ba Zi</span>
+      <span>Human Design</span>
       <span>I Ching</span>
       <span>Business School Honours</span>
     </div>
   </div>
 </section>
 
-
-<!-- ── BOOKING FORM ── -->
-<section class="booking-section" id="booking-form">
-  <div class="booking-wrap">
-
-    <div class="booking-head">
-      <span class="booking-eye">Book a reading</span>
-      <h2 class="booking-title">Every reading begins with an intention.</h2>
-      <p class="booking-desc">Fill in the form below and we will confirm your booking within 48 hours — with a payment link via WhatsApp or email.</p>
-      <div class="booking-rule"></div>
-    </div>
-
-    <div class="form-shell" id="form-shell">
-
-      <span class="form-group-label">Your Details</span>
-      <div class="form-row">
-        <div class="f-field">
-          <label class="f-label" for="f-name">Name / Initials</label>
-          <input id="f-name" type="text" placeholder="How you'd like to be addressed">
-        </div>
-        <div class="f-field">
-          <label class="f-label" for="f-email">Email Address</label>
-          <input id="f-email" type="email" placeholder="Your reading will be sent here">
-        </div>
-        <div class="f-field">
-          <label class="f-label" for="f-origin">Country of Origin</label>
-          <input id="f-origin" type="text" placeholder="Where you are from">
-        </div>
-        <div class="f-field">
-          <label class="f-label" for="f-residence">Country of Residence</label>
-          <input id="f-residence" type="text" placeholder="Where you currently live">
-        </div>
-        <div class="f-field">
-          <label class="f-label" for="f-social">Social Media</label>
-          <input id="f-social" type="text" placeholder="Where we can reach you">
-        </div>
-        <div class="f-field">
-          <label class="f-label" for="f-birthday">Birthday</label>
-          <input id="f-birthday" type="text" placeholder="Day · Month · Year (+ time and place if known)">
-        </div>
-      </div>
-
-      <hr class="form-sep">
-
-      <span class="form-group-label">Your Reading</span>
-      <div class="form-row">
-        <div class="f-field span-2">
-          <label class="f-label" for="f-package">Reading</label>
-          <select id="f-package">
-            <option value="" disabled selected>Select a reading</option>
-            <optgroup label="── Entry Readings (All Paths)">
-              <option>Mini Reading </option>
-              <option>Current State Reading</option>
-              <option>Yes / No + Timing</option>
-              <option>I Ching Oracle</option>
-            </optgroup>
-            <optgroup label="── The Mind · Strategic Readings">
-              <option>01 · Business Clarity Session</option>
-              <option>02 · Business Outlook Reading</option>
-              <option>03 · Launch Reading</option>
-              <option>04 · Monthly Energy Forecast</option>
-              <option>05 · Yearly Forecast</option>
-              <option>06 · Career Trajectory Reading</option>
-              <option>07 · The Book of You — Western Astrology</option>
-              <option>08 · The Book of You — Ba Zi</option>
-              <option>09 · The Book of You — Tarot Soul Portrait</option>
-              <option>10 · Founder's Compass (3-month retainer)</option>
-              <option>11 · Monthly Guidance (per session)</option>
-              <option>11 · Monthly Guidance (3-month retainer)</option>
-              <option>12 · Online Consultation — 60 min</option>
-              <option>12 · Online Consultation — 90 min</option>
-              <option>13 · Onsite Consultation — 60 min</option>
-              <option>13 · Onsite Consultation — 90 min</option>
-              <option>14 · Mentorship (per session)</option>
-              <option>14 · Mentorship (3-month retainer)</option>
-            </optgroup>
-            <optgroup label="── The Heart · Love Readings">
-              <option>Will We?</option>
-              <option>What Do They Think of Me?</option>
-              <option>Love Timing Reading</option>
-              <option>The Relationship Reading</option>
-              <option>The Soulmate Reading</option>
-              <option>Compatibility Reading</option>
-              <option>Are We Over?</option>
-              <option>Past Life Connection</option>
-              <option>Your Love Blueprint</option>
-              <option>Healing the Heart Reading</option>
-              <option>Channeled Letter for the Beloved</option>
-              <option>Channeled Poem for the Beloved5</option>
-              <option>Gift Reading</option>
-            </optgroup>
-            <optgroup label="── The Soul · Self-Introduction Rites">
-              <option>The Initiate</option>
-              <option>The Savant</option>
-              <option>The Sage</option>
-              <option>Know Your Living Soul</option>
-            </optgroup>
-          </select>
-        </div>
-        <div class="f-field">
-          <label class="f-label" for="f-language">Language</label>
-          <select id="f-language">
-            <option value="" disabled selected>Select language</option>
-            <option>English</option>
-            <option>Bahasa Indonesia</option>
-          </select>
-        </div>
-        <div class="f-field">
-          <label class="f-label" for="f-delivery">Delivery</label>
-          <select id="f-delivery">
-            <option value="" disabled selected>Select delivery</option>
-            <option>Written response (chat / email)</option>
-            <option>PDF Report</option>
-            <option>Online Consultation (video call)</option>
-            <option>Onsite Consultation (Indonesia only)</option>
-          </select>
-        </div>
-        <div class="f-field span-2">
-          <label class="f-label" for="f-question">Your Question</label>
-          <textarea id="f-question" placeholder="The question, the situation, the person — share as much or as little as feels right."></textarea>
-        </div>
-        <div class="f-field span-2">
-          <label class="f-label" for="f-notes">Notes</label>
-          <textarea id="f-notes" placeholder="Any context, sensitivities, or specific things you'd like us to know." style="min-height:70px"></textarea>
-        </div>
-      </div>
-
-      <!-- SUCCESS STATE -->
-      <div id="success-msg">
-        <span class="success-mark">✦ Request Received</span>
-        <p class="success-body">Your reading is being held for you. We will review your request and reach out within 48 hours with confirmation and a payment link — via WhatsApp or email. No payment is required until your booking is confirmed.</p>
-        <button class="wa-btn" id="wa-btn">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-          Continue on WhatsApp
-        </button>
-      </div>
-
-      <div id="form-footer" class="submit-row">
-        <p class="submit-note">We will confirm your booking within 48 hours with a payment link. No payment required until confirmed. All readings conducted with full discretion.</p>
-        <button class="submit-btn" onclick="handleSubmit()">Submit Request</button>
-      </div>
-
-    </div>
-  </div>
-</section>
-
 <!-- ── FOOTER ── -->
 <footer class="footer">
-  <div class="wrap">
-    <img src="https://i.imgur.com/fxNdma1.png" alt="Karsa Bintang" class="footer-logo">
-    <p class="footer-sub">Where will meets the will of the stars.</p>
-    <p class="footer-promise">Soothsayer of the mind, the heart, and the soul.</p>
-    <p class="footer-copy">EST. 2020. All rights reserved.</p>
-    <div class="footer-social">
-      <a href="https://twitter.com/karsabintang" target="_blank" rel="noopener" class="social-link" aria-label="Twitter">
-        <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.259 5.631 5.905-5.631zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-      </a>
-      <a href="https://instagram.com/karsabintang" target="_blank" rel="noopener" class="social-link" aria-label="Instagram">
-        <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
-      </a>
-    </div>
+  <img src="https://i.imgur.com/fxNdma1.png" alt="Karsa Bintang" class="footer-logo">
+  <p class="footer-sub">The will of the stars.</p>
+  <p class="footer-promise">Soothsayer of the mind, the heart, and the soul.</p>
+  <div class="footer-social">
+    <a href="https://twitter.com/karsabintang" target="_blank" rel="noopener" class="social-link" aria-label="Twitter / X">
+      <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.259 5.631 5.905-5.631zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+    </a>
+    <a href="https://instagram.com/karsa.bintang" target="_blank" rel="noopener" class="social-link" aria-label="Instagram">
+      <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+    </a>
   </div>
+  <p class="footer-copy">Est. 2020. All rights reserved.</p>
 </footer>
 
 <script>
-// ── STARFIELD ──
-const sf = document.getElementById('sf');
-for (let i = 0; i < 160; i++) {
-  const s = document.createElement('div');
-  s.classList.add('star');
-  const sz = Math.random() * 1.8 + 0.3;
-  const colors = ['#e8d898', '#f5c4d3', '#c0cce8'];
-  s.style.cssText = `
-    width:${sz}px; height:${sz}px;
-    left:${Math.random()*100}%;
-    top:${Math.random()*100}%;
-    background:${colors[Math.floor(Math.random()*colors.length)]};
-    --d:${Math.random()*5+2}s;
-    --delay:-${Math.random()*7}s;
-    --op:${Math.random()*0.3+0.05}
-  `;
-  sf.appendChild(s);
-}
-
-// ── PARTICLES PER DOOR ──
-function makeParticles(containerId, color, count = 5) {
-  const container = document.getElementById(containerId);
-  if (!container) return;
-  for (let i = 0; i < count; i++) {
-    const p = document.createElement('div');
-    p.classList.add('particle');
-    const sz = Math.random() * 2 + 1;
-    const x = (Math.random() - 0.5) * 30;
-    const y = -(Math.random() * 40 + 20);
-    p.style.cssText = `
-      width:${sz}px; height:${sz}px;
-      left:${Math.random()*90+5}%;
-      top:${Math.random()*80+5}%;
-      background:${color};
-      --pd:${Math.random()*6+4}s;
-      --pdelay:-${Math.random()*8}s;
-      --pop:${Math.random()*0.25+0.05};
-      --px:${x}px;
-      --py:${y}px;
-    `;
-    container.appendChild(p);
-  }
-}
-makeParticles('p-mind', '#e6c16e', 6);
-makeParticles('p-heart', '#d4607a', 6);
-makeParticles('p-soul', '#c9a254', 6);
-
-// ── ENTRANCE ANIMATIONS on scroll ──
 const revealObs = new IntersectionObserver((entries) => {
-  entries.forEach((entry, i) => {
+  entries.forEach(entry => {
     if (entry.isIntersecting) {
-      setTimeout(() => entry.target.classList.add('visible'), i * 100);
+      entry.target.classList.add('visible');
       revealObs.unobserve(entry.target);
     }
   });
-}, { threshold: 0.08 });
+}, { threshold: 0.05 });
 
-// Doors
-document.querySelectorAll('.door').forEach(d => revealObs.observe(d));
-
-// About
-const aboutSection = document.querySelector('.about-section');
-if (aboutSection) revealObs.observe(aboutSection);
-
-// Tier I elements — staggered
-const tier1Head = document.querySelector('.tier1-head');
-if (tier1Head) revealObs.observe(tier1Head);
-
-document.querySelectorAll('.tier1-card').forEach((card, i) => {
-  card.style.transitionDelay = `${i * 0.08}s`;
-  revealObs.observe(card);
-});
-
-const tier1Addon = document.querySelector('.tier1-addon');
-if (tier1Addon) revealObs.observe(tier1Addon);
-
-const tier1Cta = document.querySelector('.tier1-cta-wrap');
-if (tier1Cta) revealObs.observe(tier1Cta);
-
-const bookingHead = document.querySelector('.booking-head');
-if (bookingHead) revealObs.observe(bookingHead);
-const formShell = document.querySelector('.form-shell');
-if (formShell) revealObs.observe(formShell);
-</script>
-
-
-<script>
-async function handleSubmit() {
-  const get = id => document.getElementById(id)?.value?.trim() || '';
-  const name     = get('f-name');
-  const email    = get('f-email');
-  const origin   = get('f-origin');
-  const residence= get('f-residence');
-  const social   = get('f-social');
-  const birthday = get('f-birthday');
-  const pkg      = get('f-package');
-  const lang     = get('f-language');
-  const delivery = get('f-delivery');
-  const question = get('f-question');
-  const notes    = get('f-notes');
-
-  if (!name || !email || !pkg) {
-    alert('Please fill in at least your name, email, and reading before submitting.');
-    return;
-  }
-
-  const btn = document.querySelector('#form-footer .submit-btn');
-  btn.textContent = 'Sending...';
-  btn.disabled = true;
-
-  try {
-    await fetch('https://formspree.io/f/mbdzlzbw', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body: JSON.stringify({
-        name, email,
-        country_of_origin: origin,
-        country_of_residence: residence,
-        social_media: social,
-        birthday,
-        reading_package: pkg,
-        language: lang,
-        delivery_method: delivery,
-        question,
-        notes
-      })
-    });
-  } catch(e) { console.warn('Formspree error:', e); }
-
-  const waMsg = [
-    '✦ *Karsa Bintang — Reading Request*',
-    '',
-    `Name: ${name}`,
-    `Email: ${email}`,
-    `Origin: ${origin || '—'}`,
-    `Residence: ${residence || '—'}`,
-    `Social: ${social || '—'}`,
-    `Birthday: ${birthday || '—'}`,
-    '',
-    `Reading: ${pkg}`,
-    `Language: ${lang || '—'}`,
-    `Delivery: ${delivery || '—'}`,
-    `Question: ${question || '—'}`,
-    `Notes: ${notes || '—'}`
-  ].join('\n');
-
-  document.getElementById('wa-btn').onclick = () => {
-    window.open('https://wa.me/6285128021965?text=' + encodeURIComponent(waMsg), '_blank');
-  };
-
-  document.getElementById('form-footer').style.display = 'none';
-  document.getElementById('success-msg').style.display = 'block';
-}
+document.querySelectorAll('.offering-card, .about-section').forEach(el => revealObs.observe(el));
 </script>
 
 </body>
